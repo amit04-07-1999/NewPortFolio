@@ -1,14 +1,18 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Experience from './components/Experience'
+import Projects from './components/Projects'
 
 function App() {
   return (
-    <div className="bg-black min-h-screen text-white">
-      <BrowserRouter>
+    <div className="min-h-screen bg-gray-50">
+      <Router>
         <Routes>
           <Route path='/' element={<Home />}></Route>
+          <Route path='/experience' element={<Experience />}></Route>
+          <Route path='/projects' element={<Projects />}></Route>
         </Routes>
-      </BrowserRouter>
+      </Router>
     </div>
   );
 }

@@ -84,13 +84,11 @@ const ContactForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-purple-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 
-                focus:outline-none focus:border-purple-500 transition-all duration-300
-                group-hover:border-purple-500/50"
+              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
+                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
+                group-hover:border-blue-300"
               placeholder="Your Name"
             />
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 
-              group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
           </div>
 
           {/* Email Input */}
@@ -101,13 +99,11 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full bg-transparent border border-purple-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 
-                focus:outline-none focus:border-purple-500 transition-all duration-300
-                group-hover:border-purple-500/50"
+              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
+                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
+                group-hover:border-blue-300"
               placeholder="Your Email"
             />
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 
-              group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
           </div>
         </div>
 
@@ -119,13 +115,11 @@ const ContactForm = () => {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full bg-transparent border border-purple-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 
-              focus:outline-none focus:border-purple-500 transition-all duration-300
-              group-hover:border-purple-500/50"
+            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
+              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
+              group-hover:border-blue-300"
             placeholder="Subject"
           />
-          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 
-            group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         </div>
 
         {/* Message Input */}
@@ -136,13 +130,11 @@ const ContactForm = () => {
             onChange={handleChange}
             required
             rows="5"
-            className="w-full bg-transparent border border-purple-500/30 rounded-lg px-4 py-3 text-white placeholder-gray-500 
-              focus:outline-none focus:border-purple-500 transition-all duration-300 resize-none
-              group-hover:border-purple-500/50"
+            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
+              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300 resize-none
+              group-hover:border-blue-300"
             placeholder="Your Message"
           ></textarea>
-          <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-purple-500/20 to-pink-500/20 opacity-0 
-            group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
         </div>
 
         {/* Submit Button */}
@@ -150,13 +142,10 @@ const ContactForm = () => {
           <button
             type="submit"
             disabled={status.submitting}
-            onClick={() => console.log('Button clicked')}
-            className="group relative px-8 py-4 bg-transparent overflow-hidden rounded-full inline-flex items-center 
+            className="group relative px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full inline-flex items-center 
               transform transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100
-              cursor-pointer z-10"
+              text-white cursor-pointer"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-70 group-hover:opacity-100 transition-all duration-300"></span>
-            <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_120%,rgba(120,0,255,0.4),transparent)] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
             <span className="relative flex items-center text-lg font-medium">
               {status.submitting ? 'Sending...' : 'Send Message'}
               <svg className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform duration-300" 
@@ -169,12 +158,12 @@ const ContactForm = () => {
 
         {/* Status Messages */}
         {status.submitted && (
-          <div className="text-center text-green-400 bg-green-400/10 rounded-lg px-4 py-3 animate-fade-in">
+          <div className="text-center text-green-600 bg-green-50 rounded-lg px-4 py-3 animate-fade-in">
             Message sent successfully! I'll get back to you soon.
           </div>
         )}
         {status.error && (
-          <div className="text-center text-red-400 bg-red-400/10 rounded-lg px-4 py-3 animate-fade-in">
+          <div className="text-center text-red-600 bg-red-50 rounded-lg px-4 py-3 animate-fade-in">
             {status.error}
           </div>
         )}

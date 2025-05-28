@@ -71,113 +71,104 @@ const Services = () => {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="py-30 relative overflow-hidden opacity-0 translate-y-10 transition-all duration-1000"
+    <section
+      ref={sectionRef}
+      className="py-16 relative overflow-hidden opacity-0 translate-y-10 transition-all duration-1000"
     >
-      {/* Animated Background Elements */}
+      {/* Background with subtle pattern */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-black via-purple-900/10 to-black"></div>
-        
-        {/* Animated Grid Lines */}
+        <div className="absolute inset-0 bg-gray-50"></div>
+
+        {/* Subtle grid pattern */}
         <div className="absolute inset-0" style={{ opacity: 0.1 }}>
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute h-[1px] w-full bg-gradient-to-r from-transparent via-purple-500 to-transparent transform -translate-y-1/2"
+              className="absolute h-[1px] w-full bg-blue-500 transform -translate-y-1/2"
               style={{ top: `${(i + 1) * 5}%` }}
             />
           ))}
           {[...Array(20)].map((_, i) => (
             <div
               key={i}
-              className="absolute w-[1px] h-full bg-gradient-to-b from-transparent via-purple-500 to-transparent transform -translate-x-1/2"
+              className="absolute w-[1px] h-full bg-blue-500 transform -translate-x-1/2"
               style={{ left: `${(i + 1) * 5}%` }}
             />
           ))}
         </div>
-
-        {/* Decorative Elements */}
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-10 animate-blob animation-delay-2000"></div>
       </div>
 
       <div className="container mx-auto px-4 relative">
-        {/* Section Title with Animation */}
-        <div className="flex flex-col items-center mb-16 opacity-100">
-          <div className="relative">
-            <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-400 to-white animate-gradient-x">
+        {/* Section Title */}
+        <div className="flex flex-col items-center mb-10 opacity-100">
+          <div className="relative mb-6 group">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
               EXPERTISE
             </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-purple-500 to-transparent"></div>
+            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
           </div>
-          <p className="mt-6 text-gray-400 text-center max-w-2xl">
+          <p className="mt-4 text-gray-600 text-center max-w-2xl">
             Specialized in creating modern web applications with cutting-edge technologies
           </p>
         </div>
 
         {/* Services Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
             <div
               key={service.id}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group relative overflow-hidden rounded-2xl backdrop-blur-sm p-8 opacity-0 translate-y-10 transition-all duration-1000
-                bg-gradient-to-br from-gray-900/50 to-black border border-white/10
-                hover:border-purple-500/50 hover:scale-105
-                hover:shadow-[0_0_30px_rgba(139,92,246,0.1)]"
+              className="group relative overflow-hidden rounded-2xl bg-white p-6 opacity-0 translate-y-10 transition-all duration-1000
+                border border-gray-200 hover:border-blue-200 hover:shadow-lg
+                hover:scale-105"
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Card Content */}
               <div className="relative z-10">
-                {/* Icon Container with Animation */}
-                <div className="relative w-20 h-20 mb-6 group-hover:scale-110 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-full blur-md group-hover:blur-xl transition-all duration-500"></div>
-                  <div className="relative w-full h-full rounded-full bg-gradient-to-br from-purple-500/10 to-pink-500/10 flex items-center justify-center">
-                    <div className="text-purple-400 group-hover:text-purple-300 transition-colors duration-500 transform group-hover:rotate-12">
+                {/* Icon Container */}
+                <div className="relative w-16 h-16 mb-4 group-hover:scale-110 transition-transform duration-500">
+                  <div className="absolute inset-0 bg-blue-100 rounded-full blur-md group-hover:blur-xl transition-all duration-500"></div>
+                  <div className="relative w-full h-full rounded-full bg-blue-50 flex items-center justify-center">
+                    <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-500 transform group-hover:rotate-12">
                       {service.icon}
                     </div>
                   </div>
                 </div>
 
-                {/* Title with Gradient Animation */}
-                <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-white to-purple-200 group-hover:from-purple-200 group-hover:to-white transition-all duration-500">
-                    {service.title}
-                  </span>
+                {/* Title */}
+                <h3 className="text-xl sm:text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                  {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-400 mb-6 group-hover:text-gray-300 transition-colors duration-300">
+                <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300">
                   {service.description}
                 </p>
 
-                {/* Skills with Hover Effects */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2 mb-4">
                   {service.skills.map((skill, i) => (
-                    <span 
+                    <span
                       key={i}
-                      className="px-3 py-1 text-sm rounded-full bg-purple-500/10 text-purple-300 border border-purple-500/20 
-                        group-hover:border-purple-500/40 group-hover:bg-purple-500/20 transition-all duration-300
-                        hover:scale-105 hover:border-purple-500/60"
+                      className="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-600 border border-blue-100 
+                        group-hover:border-blue-200 group-hover:bg-blue-100 transition-all duration-300
+                        hover:scale-105"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
 
-                {/* Number with Gradient */}
+                {/* Number */}
                 <div className="flex justify-between items-center">
-                  <span className="text-6xl sm:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-gray-700 to-gray-600 group-hover:from-gray-600 group-hover:to-gray-500 transition-colors duration-500">
+                  <span className="text-5xl sm:text-6xl font-bold text-gray-100 group-hover:text-blue-100 transition-colors duration-500">
                     {service.number}
                   </span>
                 </div>
               </div>
 
-              {/* Card Background Effects */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-transparent opacity-0 group-hover:opacity-10 transition-opacity duration-500"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+              {/* Card Effects */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
           ))}
         </div>
