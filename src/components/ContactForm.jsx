@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
+import { useTheme } from '../context/ThemeContext';
 
 const ContactForm = () => {
+  const { darkMode } = useTheme();
+  
   useEffect(() => {
     // Initialize EmailJS with your public key
     emailjs.init('7jI6GN8xhgLVoZN4m');
-    // console.log('EmailJS initialized');
   }, []);
 
   const [formData, setFormData] = useState({
@@ -31,11 +33,9 @@ const ContactForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // console.log('Form submitted', formData);
     setStatus({ submitting: true, submitted: false, error: null });
 
     try {
-    //   console.log('Sending email...');
       const templateParams = {
         from_name: formData.name,
         from_email: formData.email,
@@ -45,8 +45,6 @@ const ContactForm = () => {
         reply_to: formData.email
       };
 
-    //   console.log('Template params:', templateParams);
-
       const response = await emailjs.send(
         'service_g5tkgvh',
         'template_ui5fr9i',
@@ -54,7 +52,6 @@ const ContactForm = () => {
         '7jI6GN8xhgLVoZN4m'
       );
 
-    //   console.log('Email sent successfully:', response);
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
 
@@ -72,6 +69,13 @@ const ContactForm = () => {
     }
   };
 
+  const inputClasses = `w-full rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
+    focus:outline-none focus:ring-1 transition-all duration-300
+    ${darkMode 
+      ? 'bg-gray-800 border-gray-700 focus:border-blue-500 focus:ring-blue-500 group-hover:border-gray-600 text-white placeholder-gray-400' 
+      : 'bg-white border-gray-300 focus:border-blue-500 focus:ring-blue-500 group-hover:border-blue-300'
+    } border`;
+
   return (
     <div className="w-full max-w-2xl mx-auto">
       <form onSubmit={handleSubmit} className="space-y-6">
@@ -84,9 +88,7 @@ const ContactForm = () => {
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
-                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
-                group-hover:border-blue-300"
+              className={inputClasses}
               placeholder="Your Name"
             />
           </div>
@@ -99,9 +101,7 @@ const ContactForm = () => {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
-                focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
-                group-hover:border-blue-300"
+              className={inputClasses}
               placeholder="Your Email"
             />
           </div>
@@ -115,9 +115,7 @@ const ContactForm = () => {
             value={formData.subject}
             onChange={handleChange}
             required
-            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
-              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300
-              group-hover:border-blue-300"
+            className={inputClasses}
             placeholder="Subject"
           />
         </div>
@@ -130,9 +128,7 @@ const ContactForm = () => {
             onChange={handleChange}
             required
             rows="5"
-            className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-gray-900 placeholder-gray-500 
-              focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition-all duration-300 resize-none
-              group-hover:border-blue-300"
+            className={`${inputClasses} resize-none`}
             placeholder="Your Message"
           ></textarea>
         </div>
@@ -142,9 +138,12 @@ const ContactForm = () => {
           <button
             type="submit"
             disabled={status.submitting}
-            className="group relative px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full inline-flex items-center 
+            className={`group relative px-8 py-4 rounded-full inline-flex items-center 
               transform transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:hover:scale-100
-              text-white cursor-pointer"
+              ${darkMode 
+                ? 'bg-blue-600 hover:bg-blue-700' 
+                : 'bg-blue-500 hover:bg-blue-600'
+              } text-white cursor-pointer`}
           >
             <span className="relative flex items-center text-lg font-medium">
               {status.submitting ? 'Sending...' : 'Send Message'}
@@ -158,12 +157,20 @@ const ContactForm = () => {
 
         {/* Status Messages */}
         {status.submitted && (
-          <div className="text-center text-green-600 bg-green-50 rounded-lg px-4 py-3 animate-fade-in">
+          <div className={`text-center rounded-lg px-4 py-3 animate-fade-in ${
+            darkMode 
+              ? 'text-green-400 bg-green-900/30' 
+              : 'text-green-600 bg-green-50'
+          }`}>
             Message sent successfully! I'll get back to you soon.
           </div>
         )}
         {status.error && (
-          <div className="text-center text-red-600 bg-red-50 rounded-lg px-4 py-3 animate-fade-in">
+          <div className={`text-center rounded-lg px-4 py-3 animate-fade-in ${
+            darkMode 
+              ? 'text-red-400 bg-red-900/30' 
+              : 'text-red-600 bg-red-50'
+          }`}>
             {status.error}
           </div>
         )}

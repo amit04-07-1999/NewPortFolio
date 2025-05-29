@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       fontFamily: {
@@ -24,6 +25,9 @@ export default {
         'slide-in': 'slide-in 0.6s ease-out forwards',
         'noise': 'noise 0.5s linear infinite',
         'gradient-x': 'gradient-x 15s ease infinite',
+        'fade-in': 'fadeIn 1s ease-in-out',
+        'slide-down': 'slideDown 1s ease-out',
+        'slide-up': 'slideUp 1s ease-out',
       },
       keyframes: {
         'glitch': {
@@ -66,6 +70,18 @@ export default {
             'background-size': '200% 200%',
             'background-position': 'right center'
           }
+        },
+        fadeIn: {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        slideDown: {
+          '0%': { transform: 'translateY(-100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        slideUp: {
+          '0%': { transform: 'translateY(100%)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
         },
       },
     },

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react'
+import { useTheme } from '../context/ThemeContext'
 
 const Projects = () => {
+  const { darkMode } = useTheme();
   const sectionRef = useRef(null);
   const cardsRef = useRef([]);
 
@@ -113,39 +115,18 @@ const Projects = () => {
   return (
     <section 
       ref={sectionRef}
-      className="py-16 relative min-h-[90vh] opacity-0 translate-y-10 transition-all duration-1000 bg-gray-50"
+      className={`py-16 relative mb-10 min-h-[90vh] opacity-0 translate-y-10 transition-all duration-1000 ${
+        darkMode ? 'bg-gray-900' : 'bg-gray-50'
+      }`}
     >
-      {/* Background Pattern */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute inset-0" style={{ opacity: 0.05 }}>
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-[1px] w-full bg-blue-500 transform -translate-y-1/2"
-              style={{ 
-                top: `${(i + 1) * 5}%`,
-                animationDelay: `${i * 0.1}s`
-              }}
-            />
-          ))}
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-[1px] h-full bg-blue-500 transform -translate-x-1/2"
-              style={{ 
-                left: `${(i + 1) * 5}%`,
-                animationDelay: `${i * 0.1}s`
-              }}
-            />
-          ))}
-        </div>
-      </div>
 
       <div className="container mx-auto px-4 relative z-10">
         {/* Section Title */}
         <div className="flex flex-col items-center mb-12">
           <div className="relative mb-6 group">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <h2 className={`text-4xl md:text-5xl font-bold ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               MY WORK
             </h2>
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
@@ -154,7 +135,9 @@ const Projects = () => {
 
         {/* Experience Section */}
         <div className="mb-16">
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h3 className={`text-3xl font-bold mb-8 text-center ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             Professional Experience
           </h3>
           <div className="space-y-12">
@@ -162,23 +145,32 @@ const Projects = () => {
               <div 
                 key={exp.id}
                 ref={(el) => (cardsRef.current[expIndex] = el)}
-                className="relative opacity-0 translate-y-10 transition-all duration-1000 bg-white rounded-2xl p-6 border border-gray-200 hover:border-blue-200 hover:shadow-lg group"
+                className={`relative opacity-0 translate-y-10 transition-all duration-1000 rounded-2xl p-6 
+                  ${darkMode 
+                    ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
+                    : 'bg-white border-gray-200 hover:border-blue-200'
+                  } border hover:shadow-lg group`}
                 style={{ transitionDelay: `${expIndex * 200}ms` }}
               >
                 {/* Company Header */}
                 <div className="flex flex-col md:flex-row justify-between items-start mb-8 relative">
                   <div className="group/title relative">
                     <div className="absolute -left-4 top-1/2 -translate-y-1/2 w-1 h-12 bg-blue-500 transform scale-y-0 group-hover:scale-y-100 transition-transform duration-500"></div>
-                    <h4 className="text-3xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors duration-300 pl-2">
+                    <h4 className={`text-3xl font-bold group-hover:text-blue-500 transition-colors duration-300 pl-2 ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
                       {exp.company}
                     </h4>
-                    <p className="text-blue-600 group-hover:text-blue-700 transition-colors duration-300 text-lg mt-1 pl-2">
+                    <p className="text-blue-500 group-hover:text-blue-400 transition-colors duration-300 text-lg mt-1 pl-2">
                       {exp.location}
                     </p>
                   </div>
                   <div className="mt-4 md:mt-0">
-                    <span className="relative px-6 py-2 rounded-full bg-blue-50 text-blue-600 border border-blue-200 
-                      group-hover:border-blue-300 transition-all duration-300 hover:scale-105 text-sm md:text-base inline-block">
+                    <span className={`relative px-6 py-2 rounded-full text-sm md:text-base inline-block
+                      ${darkMode 
+                        ? 'bg-gray-700 text-blue-400 border-gray-600' 
+                        : 'bg-blue-50 text-blue-600 border-blue-200'
+                      } border group-hover:border-blue-400 transition-all duration-300 hover:scale-105`}>
                       {exp.duration}
                     </span>
                   </div>
@@ -189,32 +181,43 @@ const Projects = () => {
                   {exp.projects.map((project, index) => (
                     <div 
                       key={index}
-                      className="group/card relative overflow-hidden rounded-xl bg-gray-50 p-5 
-                        border border-gray-100 transition-all duration-500
-                        hover:border-blue-200 hover:shadow-md
-                        hover:-translate-y-1"
+                      className={`group/card relative overflow-hidden rounded-xl p-5 
+                        transition-all duration-500 hover:-translate-y-1
+                        ${darkMode 
+                          ? 'bg-gray-700 border-gray-600 hover:border-blue-400 hover:shadow-blue-900/20' 
+                          : 'bg-gray-50 border-gray-100 hover:border-blue-200'
+                        } border`}
                     >
                       {/* Project Content */}
                       <div className="relative z-10">
                         <div className="flex items-center mb-3">
-                          <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-3 transform group-hover/card:scale-110 transition-transform duration-300">
+                          <div className={`w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center mr-3 
+                            transform group-hover/card:scale-110 transition-transform duration-300 
+                            ${darkMode ? 'bg-blue-600' : 'bg-blue-500'}`}>
                             <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                             </svg>
                           </div>
-                          <h5 className="text-xl font-bold text-gray-900 group-hover/card:text-blue-600 transition-colors duration-300">
+                          <h5 className={`text-xl font-bold group-hover/card:text-blue-500 transition-colors duration-300 ${
+                            darkMode ? 'text-white' : 'text-gray-900'
+                          }`}>
                             {project.title}
                           </h5>
                         </div>
-                        <p className="text-gray-600 mb-4 group-hover/card:text-gray-700 transition-colors duration-300 leading-relaxed pl-11">
+                        <p className={`mb-4 transition-colors duration-300 leading-relaxed pl-11 ${
+                          darkMode ? 'text-gray-400 group-hover/card:text-gray-300' : 'text-gray-600 group-hover/card:text-black'
+                        }`}>
                           {project.description}
                         </p>
                         <div className="flex flex-wrap gap-2 pl-11">
                           {project.tech.map((tech, i) => (
                             <span 
                               key={i}
-                              className="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-600 border border-blue-100 
-                                group-hover/card:border-blue-200 transition-all duration-300 hover:scale-105"
+                              className={`px-3 py-1 text-sm rounded-full border transition-all duration-300 hover:scale-105
+                                ${darkMode 
+                                  ? 'bg-gray-800 text-blue-400 border-gray-600 group-hover/card:border-blue-500' 
+                                  : 'bg-blue-50 text-blue-600 border-blue-100 group-hover/card:border-blue-200'
+                                }`}
                             >
                               {tech}
                             </span>
@@ -231,7 +234,9 @@ const Projects = () => {
 
         {/* Personal Projects Section */}
         <div>
-          <h3 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+          <h3 className={`text-3xl font-bold mb-8 text-center ${
+            darkMode ? 'text-white' : 'text-gray-900'
+          }`}>
             Personal Projects
           </h3>
           <div className="grid md:grid-cols-2 gap-6">
@@ -239,10 +244,13 @@ const Projects = () => {
               <div
                 key={project.id}
                 ref={(el) => (cardsRef.current[index + experiences.length] = el)}
-                className="group relative overflow-hidden rounded-xl bg-white p-6 
-                  opacity-0 translate-y-10 transition-all duration-1000 border border-gray-200 
-                  hover:border-blue-200 hover:shadow-lg
-                  hover:-translate-y-2"
+                className={`group relative overflow-hidden rounded-xl p-6 
+                  opacity-0 translate-y-10 transition-all duration-1000 
+                  hover:-translate-y-2
+                  ${darkMode 
+                    ? 'bg-gray-800 border-gray-700 hover:border-blue-400 hover:shadow-blue-900/20' 
+                    : 'bg-white border-gray-200 hover:border-blue-200 hover:shadow-lg'
+                  } border`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
                 {/* Project Image */}
@@ -267,10 +275,14 @@ const Projects = () => {
                 </div>
 
                 <div className="relative z-10">
-                  <h4 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                  <h4 className={`text-2xl font-bold mb-3 group-hover:text-blue-500 transition-colors duration-300 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>
                     {project.title}
                   </h4>
-                  <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">
+                  <p className={`mb-4 transition-colors duration-300 leading-relaxed ${
+                    darkMode ? 'text-gray-400 group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'
+                  }`}>
                     {project.description}
                   </p>
                   
@@ -278,8 +290,11 @@ const Projects = () => {
                     {project.tech.map((tech, index) => (
                       <span 
                         key={index}
-                        className="px-4 py-1.5 text-sm rounded-full bg-blue-50 text-blue-600 border border-blue-100 
-                          group-hover:border-blue-200 transition-all duration-300 hover:scale-105"
+                        className={`px-4 py-1.5 text-sm rounded-full border transition-all duration-300 hover:scale-105
+                          ${darkMode 
+                            ? 'bg-gray-700 text-blue-400 border-gray-600 group-hover:border-blue-500' 
+                            : 'bg-blue-50 text-blue-600 border-blue-100 group-hover:border-blue-200'
+                          }`}
                       >
                         {tech}
                       </span>

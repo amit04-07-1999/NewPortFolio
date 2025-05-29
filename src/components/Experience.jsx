@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import { useTheme } from '../context/ThemeContext';
 
 const Experience = () => {
+  const { darkMode } = useTheme();
   const sectionRef = useRef(null);
   const experienceRef = useRef([]);
 
@@ -90,7 +92,7 @@ const Experience = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className={`min-h-screen ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
       <Header />
       
       <main className="py-16">
@@ -100,11 +102,15 @@ const Experience = () => {
         >
           {/* Section Title */}
           <div className="text-center mb-16">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative group inline-block">
+            <h1 className={`text-4xl md:text-5xl font-bold mb-4 relative group inline-block ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               Professional Experience
               <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
             </h1>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className={`text-lg max-w-3xl mx-auto ${
+              darkMode ? 'text-gray-400' : 'text-gray-600'
+            }`}>
               My journey as a Full Stack Developer, building innovative solutions and gaining valuable expertise
             </p>
           </div>
@@ -115,38 +121,60 @@ const Experience = () => {
               <div
                 key={exp.id}
                 ref={(el) => (experienceRef.current[index] = el)}
-                className="relative bg-white rounded-xl p-8 mb-12 opacity-0 translate-y-10 transition-all duration-1000 border border-gray-200 hover:border-blue-200 hover:shadow-lg"
+                className={`relative rounded-xl p-8 mb-12 opacity-0 translate-y-10 transition-all duration-1000 border hover:shadow-lg ${
+                  darkMode 
+                    ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
+                    : 'bg-white border-gray-200 hover:border-blue-200'
+                }`}
                 style={{ transitionDelay: `${index * 200}ms` }}
               >
                 {/* Company and Duration */}
                 <div className="flex flex-col md:flex-row justify-between items-start mb-6">
                   <div>
-                    <h2 className="text-2xl font-bold text-blue-600 mb-2">{exp.role}</h2>
-                    <h3 className="text-xl font-semibold text-gray-900">{exp.company}</h3>
-                    <p className="text-gray-600">{exp.location}</p>
+                    <h2 className={`text-2xl font-bold mb-2 ${
+                      darkMode ? 'text-blue-400' : 'text-blue-600'
+                    }`}>{exp.role}</h2>
+                    <h3 className={`text-xl font-semibold ${
+                      darkMode ? 'text-white' : 'text-gray-900'
+                    }`}>{exp.company}</h3>
+                    <p className={`${
+                      darkMode ? 'text-gray-400' : 'text-gray-600'
+                    }`}>{exp.location}</p>
                   </div>
                   <div className="mt-4 md:mt-0">
-                    <span className="px-4 py-2 bg-blue-50 text-blue-600 rounded-full text-sm font-medium">
+                    <span className={`px-4 py-2 rounded-full text-sm font-medium ${
+                      darkMode 
+                        ? 'bg-gray-700 text-blue-400' 
+                        : 'bg-blue-50 text-blue-600'
+                    }`}>
                       {exp.duration}
                     </span>
                   </div>
                 </div>
 
                 {/* Description */}
-                <p className="text-gray-700 mb-6 leading-relaxed">
+                <p className={`mb-6 leading-relaxed ${
+                  darkMode ? 'text-gray-400' : 'text-gray-700'
+                }`}>
                   {exp.description}
                 </p>
 
                 {/* Responsibilities */}
                 <div className="mb-8">
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Key Responsibilities:</h4>
+                  <h4 className={`text-lg font-semibold mb-4 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Key Responsibilities:</h4>
                   <ul className="space-y-3">
                     {exp.responsibilities.map((resp, i) => (
                       <li key={i} className="flex items-start">
-                        <svg className="w-5 h-5 text-blue-500 mt-1 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg className={`w-5 h-5 mt-1 mr-3 ${
+                          darkMode ? 'text-blue-400' : 'text-blue-500'
+                        }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
                         </svg>
-                        <span className="text-gray-600">{resp}</span>
+                        <span className={`${
+                          darkMode ? 'text-gray-400' : 'text-gray-600'
+                        }`}>{resp}</span>
                       </li>
                     ))}
                   </ul>
@@ -154,20 +182,34 @@ const Experience = () => {
 
                 {/* Projects */}
                 <div>
-                  <h4 className="text-lg font-semibold text-gray-900 mb-4">Notable Projects:</h4>
+                  <h4 className={`text-lg font-semibold mb-4 ${
+                    darkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Notable Projects:</h4>
                   <div className="grid md:grid-cols-2 gap-6">
                     {exp.projects.map((project, i) => (
                       <div 
                         key={i}
-                        className="bg-gray-50 rounded-lg p-6 border border-gray-100 hover:border-blue-200 transition-all duration-300"
+                        className={`rounded-lg p-6 border transition-all duration-300 ${
+                          darkMode 
+                            ? 'bg-gray-700 border-gray-600 hover:border-blue-400' 
+                            : 'bg-gray-50 border-gray-100 hover:border-blue-200'
+                        }`}
                       >
-                        <h5 className="text-lg font-semibold text-gray-900 mb-2">{project.name}</h5>
-                        <p className="text-gray-600 mb-4">{project.description}</p>
+                        <h5 className={`text-lg font-semibold mb-2 ${
+                          darkMode ? 'text-white' : 'text-gray-900'
+                        }`}>{project.name}</h5>
+                        <p className={`mb-4 ${
+                          darkMode ? 'text-gray-400' : 'text-gray-600'
+                        }`}>{project.description}</p>
                         <div className="flex flex-wrap gap-2">
                           {project.tech.map((tech, j) => (
                             <span 
                               key={j}
-                              className="px-3 py-1 text-sm bg-white text-blue-600 rounded-full border border-blue-100"
+                              className={`px-3 py-1 text-sm rounded-full border ${
+                                darkMode 
+                                  ? 'bg-gray-800 text-blue-400 border-gray-600' 
+                                  : 'bg-white text-blue-600 border-blue-100'
+                              }`}
                             >
                               {tech}
                             </span>
@@ -183,7 +225,9 @@ const Experience = () => {
 
           {/* Skills Section */}
           <div className="mt-16 text-center">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Technical Expertise</h2>
+            <h2 className={`text-3xl font-bold mb-8 ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>Technical Expertise</h2>
             <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {[
                 "React.js", "Node.js", "MongoDB", "Express.js",
@@ -193,9 +237,15 @@ const Experience = () => {
               ].map((skill, index) => (
                 <div 
                   key={index}
-                  className="bg-white rounded-lg p-4 border border-gray-200 hover:border-blue-200 hover:shadow-md transition-all duration-300"
+                  className={`rounded-lg p-4 border transition-all duration-300 hover:shadow-md ${
+                    darkMode 
+                      ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
+                      : 'bg-white border-gray-200 hover:border-blue-200'
+                  }`}
                 >
-                  <span className="text-gray-900 font-medium">{skill}</span>
+                  <span className={`font-medium ${
+                    darkMode ? 'text-gray-300' : 'text-gray-900'
+                  }`}>{skill}</span>
                 </div>
               ))}
             </div>

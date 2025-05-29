@@ -4,8 +4,10 @@ import Hero from '../components/Hero'
 import Services from '../components/Services'
 import Projects from '../components/Project'
 import Footer from '../components/Footer'
+import { useTheme } from '../context/ThemeContext'
 
 const Home = () => {
+  const { darkMode } = useTheme();
   useEffect(() => {
     const handleScroll = () => {
       const sections = document.querySelectorAll('.animate-on-scroll');
@@ -28,14 +30,15 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative bg-white overflow-hidden">
+    <div className={`relative overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
       {/* Background with subtle pattern */}
-      <div className="fixed inset-0 bg-white overflow-hidden">
-        <div className="absolute inset-0 bg-gray-50"></div>
-        
+      <div className={`fixed inset-0 overflow-hidden ${darkMode ? 'bg-gray-900' : 'bg-white'}`}>
+        <div className={`absolute inset-0 ${darkMode ? 'bg-gray-900' : 'bg-gray-50'}`}></div>
         {/* Subtle dots pattern */}
         <div className="absolute inset-0" style={{ 
-          backgroundImage: 'radial-gradient(#3B82F6 0.5px, transparent 0.5px)', 
+          backgroundImage: darkMode
+            ? 'radial-gradient(#60a5fa 0.5px, transparent 0.5px)'
+            : 'radial-gradient(#3B82F6 0.5px, transparent 0.5px)',
           backgroundSize: '24px 24px',
           opacity: 0.1 
         }}></div>

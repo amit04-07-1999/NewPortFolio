@@ -1,6 +1,9 @@
 import React, { useEffect, useRef } from 'react'
+import { useTheme } from '../context/ThemeContext'
 
 const Services = () => {
+  const { darkMode } = useTheme();
+  
   const services = [
     {
       id: 1,
@@ -73,41 +76,25 @@ const Services = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-16 relative overflow-hidden opacity-0 translate-y-10 transition-all duration-1000"
+      className={`py-16 relative overflow-hidden opacity-0 translate-y-10 transition-all duration-1000 ${
+        darkMode ? 'bg-gray-900' : 'bg-gray-50'
+      }`}
     >
-      {/* Background with subtle pattern */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-gray-50"></div>
-
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0" style={{ opacity: 0.1 }}>
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute h-[1px] w-full bg-blue-500 transform -translate-y-1/2"
-              style={{ top: `${(i + 1) * 5}%` }}
-            />
-          ))}
-          {[...Array(20)].map((_, i) => (
-            <div
-              key={i}
-              className="absolute w-[1px] h-full bg-blue-500 transform -translate-x-1/2"
-              style={{ left: `${(i + 1) * 5}%` }}
-            />
-          ))}
-        </div>
-      </div>
 
       <div className="container mx-auto px-4 relative">
         {/* Section Title */}
         <div className="flex flex-col items-center mb-10 opacity-100">
           <div className="relative mb-6 group">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
+            <h2 className={`text-4xl md:text-5xl font-bold ${
+              darkMode ? 'text-white' : 'text-gray-900'
+            }`}>
               EXPERTISE
             </h2>
             <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
           </div>
-          <p className="mt-4 text-gray-600 text-center max-w-2xl">
+          <p className={`mt-4 text-center max-w-2xl ${
+            darkMode ? 'text-gray-400' : 'text-gray-600'
+          }`}>
             Specialized in creating modern web applications with cutting-edge technologies
           </p>
         </div>
@@ -118,30 +105,45 @@ const Services = () => {
             <div
               key={service.id}
               ref={(el) => (cardsRef.current[index] = el)}
-              className="group relative overflow-hidden rounded-2xl bg-white p-6 opacity-0 translate-y-10 transition-all duration-1000
-                border border-gray-200 hover:border-blue-200 hover:shadow-lg
-                hover:scale-105"
+              className={`group relative overflow-hidden rounded-2xl p-6 opacity-0 translate-y-10 transition-all duration-1000
+                ${darkMode 
+                  ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
+                  : 'bg-white border-gray-200 hover:border-blue-200'
+                } border hover:shadow-lg
+                hover:scale-105`}
               style={{ transitionDelay: `${index * 200}ms` }}
             >
               {/* Card Content */}
               <div className="relative z-10">
                 {/* Icon Container */}
                 <div className="relative w-16 h-16 mb-4 group-hover:scale-110 transition-transform duration-500">
-                  <div className="absolute inset-0 bg-blue-100 rounded-full blur-md group-hover:blur-xl transition-all duration-500"></div>
-                  <div className="relative w-full h-full rounded-full bg-blue-50 flex items-center justify-center">
-                    <div className="text-blue-600 group-hover:text-blue-700 transition-colors duration-500 transform group-hover:rotate-12">
+                  <div className={`absolute inset-0 rounded-full blur-md group-hover:blur-xl transition-all duration-500 ${
+                    darkMode ? 'bg-blue-900' : 'bg-blue-100'
+                  }`}></div>
+                  <div className={`relative w-full h-full rounded-full flex items-center justify-center ${
+                    darkMode ? 'bg-gray-800' : 'bg-blue-50'
+                  }`}>
+                    <div className={`${
+                      darkMode ? 'text-blue-400 group-hover:text-blue-300' : 'text-blue-600 group-hover:text-blue-700'
+                    } transition-colors duration-500 transform group-hover:rotate-12`}>
                       {service.icon}
                     </div>
                   </div>
                 </div>
 
                 {/* Title */}
-                <h3 className="text-xl sm:text-2xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors duration-300">
+                <h3 className={`text-xl sm:text-2xl font-bold mb-3 ${
+                  darkMode 
+                    ? 'text-white group-hover:text-blue-400' 
+                    : 'text-gray-900 group-hover:text-blue-600'
+                } transition-colors duration-300`}>
                   {service.title}
                 </h3>
 
                 {/* Description */}
-                <p className="text-gray-600 mb-4 group-hover:text-gray-700 transition-colors duration-300">
+                <p className={`mb-4 ${
+                  darkMode ? 'text-gray-400 group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'
+                } transition-colors duration-300`}>
                   {service.description}
                 </p>
 
@@ -150,9 +152,12 @@ const Services = () => {
                   {service.skills.map((skill, i) => (
                     <span
                       key={i}
-                      className="px-3 py-1 text-sm rounded-full bg-blue-50 text-blue-600 border border-blue-100 
-                        group-hover:border-blue-200 group-hover:bg-blue-100 transition-all duration-300
-                        hover:scale-105"
+                      className={`px-3 py-1 text-sm rounded-full transition-all duration-300
+                        hover:scale-105 ${
+                          darkMode 
+                            ? 'bg-gray-700 text-blue-400 border-gray-600 group-hover:border-blue-500 group-hover:bg-gray-600' 
+                            : 'bg-blue-50 text-blue-600 border-blue-100 group-hover:border-blue-200 group-hover:bg-blue-100'
+                        } border`}
                     >
                       {skill}
                     </span>
@@ -161,14 +166,22 @@ const Services = () => {
 
                 {/* Number */}
                 <div className="flex justify-between items-center">
-                  <span className="text-5xl sm:text-6xl font-bold text-gray-100 group-hover:text-blue-100 transition-colors duration-500">
+                  <span className={`text-5xl sm:text-6xl font-bold transition-colors duration-500 ${
+                    darkMode 
+                      ? 'text-gray-400 group-hover:text-blue-400' 
+                      : 'text-gray-400 group-hover:text-blue-400'
+                  }`}>
                     {service.number}
                   </span>
                 </div>
               </div>
 
               {/* Card Effects */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                darkMode 
+                  ? 'bg-gradient-to-br from-blue-900/20 to-transparent' 
+                  : 'bg-gradient-to-br from-blue-50 to-transparent'
+              }`}></div>
             </div>
           ))}
         </div>
