@@ -6,11 +6,12 @@ import Projects from './components/Projects'
 import { ThemeProvider } from './context/ThemeContext'
 import AnimatedBackground from './context/Animation'
 import "./App.css"
-
+import SplashCursor from './context/SplashCursor'
 function App() {
   return (
     <ThemeProvider>
       <AnimatedBackground />
+      <SplashCursor />
       <Router>
         <Routes>
           <Route path='/' element={<Home />}></Route>
