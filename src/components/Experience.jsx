@@ -236,20 +236,28 @@ const Experience = () => {
                 {[
                   "React.js", "Node.js", "MongoDB", "Express.js",
                   "JavaScript", "HTML5/CSS3", "AWS", "RESTful APIs",
-                  "Git", "Redux", "Material UI", "Socket.io",
+                  "Git", "WebRTC", "Material UI", "Socket.io",
                   "Responsive Design", "TypeScript", "Docker", "CI/CD"
                 ].map((skill, index) => (
                   <div 
                     key={index}
-                    className={`rounded-lg p-4 border transition-all duration-300 hover:shadow-md ${
+                    className={`group relative rounded-lg p-4 border transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 ${
                       darkMode 
-                        ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
-                        : 'bg-white border-gray-200 hover:border-blue-200'
+                        ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 border-gray-700 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]' 
+                        : 'bg-gradient-to-br from-white via-gray-50 to-gray-100 border-gray-200 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]'
                     }`}
                   >
-                    <span className={`font-medium ${
-                      darkMode ? 'text-gray-300' : 'text-gray-900'
-                    }`}>{skill}</span>
+                    <div className={`absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
+                      darkMode 
+                        ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10' 
+                        : 'bg-gradient-to-br from-blue-400/10 to-purple-400/10'
+                    }`}></div>
+                    <span className={`font-medium relative z-10 ${
+                      darkMode 
+                        ? 'text-gray-300 group-hover:text-blue-400' 
+                        : 'text-gray-900 group-hover:text-blue-600'
+                        
+                    } transition-colors duration-300`}>{skill}</span>
                   </div>
                 ))}
               </div>
