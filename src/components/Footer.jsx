@@ -1,6 +1,7 @@
 import React from 'react'
 import ContactForm from './ContactForm'
 import { useTheme } from '../context/ThemeContext'
+import AnimatedBackground from '../context/Animation'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,10 +9,11 @@ const Footer = () => {
   
   return (
     <footer className={`relative py-20 px-4 md:px-8 overflow-hidden ${
-      darkMode ? 'bg-gray-900' : 'bg-gray-50'
+      darkMode ? 'bg-gray-900/50' : 'bg-gray-50/50'
     }`}>
+      <AnimatedBackground />
 
-      <div className="container mx-auto relative">
+      <div className="container mx-auto relative z-20">
         <div className="max-w-4xl mx-auto text-center mb-16">
           <h2 className={`text-4xl md:text-6xl font-bold mb-12 ${
             darkMode ? 'text-white' : 'text-gray-900'

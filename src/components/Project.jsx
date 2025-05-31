@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import AnimatedBackground from '../context/Animation'
 
 const Projects = () => {
   const { darkMode } = useTheme();
@@ -116,11 +117,12 @@ const Projects = () => {
     <section 
       ref={sectionRef}
       className={`py-16 relative mb-10 min-h-[90vh] opacity-0 translate-y-10 transition-all duration-1000 ${
-        darkMode ? 'bg-gray-900' : 'bg-gray-50'
+        darkMode ? 'bg-gray-900/50' : 'bg-gray-50/50'
       }`}
     >
+      <AnimatedBackground />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         {/* Section Title */}
         <div className="flex flex-col items-center mb-12">
           <div className="relative mb-6 group">

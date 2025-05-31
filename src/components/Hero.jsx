@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import AnimatedBackground from '../context/Animation'
 
 const Hero = () => {
   const canvasRef = useRef(null);
@@ -8,8 +9,8 @@ const Hero = () => {
   
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <AnimatedBackground />
            
-
       {/* Main Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
         <div className="text-center">

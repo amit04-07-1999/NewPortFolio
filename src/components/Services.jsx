@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { useTheme } from '../context/ThemeContext'
+import AnimatedBackground from '../context/Animation'
 
 const Services = () => {
   const { darkMode } = useTheme();
@@ -80,6 +81,7 @@ const Services = () => {
         darkMode ? 'bg-gray-900' : 'bg-gray-50'
       }`}
     >
+      <AnimatedBackground />
 
       <div className="container mx-auto px-4 relative">
         {/* Section Title */}
