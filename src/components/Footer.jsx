@@ -89,7 +89,7 @@ const Footer = () => {
               </svg>
             </a>
             <a 
-              href="www.linkedin.com/in/amitkumaryadav1999" 
+              href="https://www.linkedin.com/in/amitkumaryadav1999" 
               target="_blank"
               rel="noopener noreferrer"
               className={`group relative w-14 h-14 rounded-full flex items-center justify-center overflow-hidden transform hover:scale-110 ${

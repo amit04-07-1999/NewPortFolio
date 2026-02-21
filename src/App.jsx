@@ -6,7 +6,7 @@ import Projects from './components/Projects'
 import { ThemeProvider } from './context/ThemeContext'
 import AnimatedBackground from './context/Animation'
 import "./App.css"
-import SplashCursor from './context/SplashCursor'
+import SplashCursor from './reactBitsComp/SplashCursor'
 function App() {
   return (
     <ThemeProvider>

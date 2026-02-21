@@ -1,195 +1,156 @@
-import React, { useEffect, useRef } from 'react'
-import { useTheme } from '../context/ThemeContext'
-import AnimatedBackground from '../context/Animation'
+import React, { useEffect, useRef } from 'react';
+import '../styles/portfolio.css';
+import PageBackground from '../context/PageBackground';
+import TiltedCard from '../reactBitsComp/TiltedCard';
+
+
+/* Services data */
+const SERVICES = [
+  {
+    id: 1, number: '01',
+    title: 'Frontend Development',
+    description: 'Building fast, responsive, and visually rich UIs with React.js, HTML5, CSS3, and modern JavaScript.',
+    skills: ['React.js', 'HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI/UX'],
+    imageSrc: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=300&fit=crop',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+    ),
+  },
+  {
+    id: 2, number: '02',
+    title: 'Backend Development',
+    description: 'Robust server-side solutions with Node.js, Express.js, and MongoDB — RESTful APIs at scale.',
+    skills: ['Node.js', 'Express.js', 'MongoDB', 'REST APIs', 'Database Design', 'Auth'],
+    imageSrc: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=300&h=300&fit=crop',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z" />
+        <path d="M8 12h8M8 8h4" />
+      </svg>
+    ),
+  },
+  {
+    id: 3, number: '03',
+    title: 'Cloud & DevOps',
+    description: 'Deploying and managing cloud infrastructure with AWS EC2, S3, and automated CI/CD pipelines.',
+    skills: ['AWS EC2', 'AWS S3', 'GitHub Actions', 'CI/CD', 'Cloud Architecture', 'DevOps'],
+    imageSrc: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300&h=300&fit=crop',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
+      </svg>
+    ),
+  },
+];
 
 const Services = () => {
-  const { darkMode } = useTheme();
-  
-  const services = [
-    {
-      id: 1,
-      title: "Frontend Development",
-      number: "01",
-      description: "Expertise in React.js, HTML, CSS, and JavaScript for building responsive and interactive user interfaces.",
-      skills: ["React.js", "HTML5", "CSS3", "JavaScript", "Responsive Design", "UI/UX"],
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
-        </svg>
-      )
-    },
-    {
-      id: 2,
-      title: "Backend Development",
-      number: "02",
-      description: "Proficient in Node.js, Express.js, and MongoDB for building robust server-side applications.",
-      skills: ["Node.js", "Express.js", "MongoDB", "RESTful APIs", "Database Design", "Server Architecture"],
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z" />
-        </svg>
-      )
-    },
-    {
-      id: 3,
-      title: "Cloud & DevOps",
-      number: "03",
-      description: "Experience with AWS (EC2 & S3) and CI/CD pipeline implementation using GitHub Actions.",
-      skills: ["AWS EC2", "AWS S3", "GitHub Actions", "CI/CD", "Cloud Architecture", "DevOps"],
-      icon: (
-        <svg className="w-12 h-12" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z" />
-        </svg>
-      )
-    }
-  ];
+  const cardRefs = useRef([]);
 
-  // Intersection Observer for scroll animations
-  const sectionRef = useRef(null);
-  const cardsRef = useRef([]);
 
+  /* Scroll-triggered card reveal */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100');
-            entry.target.classList.add('translate-y-0');
+            entry.target.classList.add('sv-visible');
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    cardsRef.current.forEach((card) => {
-      if (card) {
-        observer.observe(card);
-      }
-    });
-
+    cardRefs.current.forEach((el) => { if (el) observer.observe(el); });
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      className={`py-16 relative overflow-hidden opacity-0 translate-y-10 transition-all duration-1000 ${
-        darkMode ? 'bg-gray-900' : 'bg-gray-50'
-      }`}
-    >
-      <AnimatedBackground />
+    <section className="sv-root" id="services">
 
-      <div className="container mx-auto px-4 relative">
-        {/* Section Title */}
-        <div className="flex flex-col items-center mb-10 opacity-100">
-          <div className="relative mb-6 group">
-            <h2 className={`text-4xl md:text-5xl font-bold ${
-              darkMode ? 'text-white' : 'text-gray-900'
-            }`}>
-              EXPERTISE
-            </h2>
-            <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
-          </div>
-          <p className={`mt-4 text-center max-w-2xl ${
-            darkMode ? 'text-gray-400' : 'text-gray-600'
-          }`}>
-            Specialized in creating modern web applications with cutting-edge technologies
+      {/* ── All shared background layers ── */}
+      <PageBackground hatchTR hatchBL />
+
+      {/* ── Ghost outline text (section-specific position) ── */}
+      <div className="sv-ghost-wrap" aria-hidden="true">
+        <span className="sv-ghost-text">SERVICES</span>
+      </div>
+
+
+
+
+      {/* ── Content ── */}
+      <div className="sv-inner">
+
+        {/* Header */}
+        <div className="sv-header">
+          <p className="sv-label">What I Do</p>
+          <h2 className="sv-title">MY EXPERTISE</h2>
+          <div className="sv-title-line" />
+          <p className="sv-desc">
+            Specialized in building modern full-stack web applications
+            with cutting-edge technologies and clean architecture.
           </p>
         </div>
 
-        {/* Services Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, index) => (
+        {/* Cards */}
+        <div className="sv-grid">
+          {SERVICES.map((svc, idx) => (
             <div
-              key={service.id}
-              ref={(el) => (cardsRef.current[index] = el)}
-              className={`group relative overflow-hidden rounded-2xl p-6 opacity-0 translate-y-10 transition-all duration-1000
-                ${darkMode 
-                  ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
-                  : 'bg-white border-gray-200 hover:border-blue-200'
-                } border hover:shadow-lg
-                hover:scale-105`}
-              style={{ transitionDelay: `${index * 200}ms` }}
+              key={svc.id}
+              className="sv-card"
+              ref={(el) => (cardRefs.current[idx] = el)}
+              style={{ animationDelay: `${idx * 180}ms` }}
             >
-              {/* Card Content */}
-              <div className="relative z-10">
-                {/* Icon Container */}
-                <div className="relative w-16 h-16 mb-4 group-hover:scale-110 transition-transform duration-500">
-                  <div className={`absolute inset-0 rounded-full blur-md group-hover:blur-xl transition-all duration-500 ${
-                    darkMode ? 'bg-blue-900' : 'bg-blue-100'
-                  }`}></div>
-                  <div className={`relative w-full h-full rounded-full flex items-center justify-center ${
-                    darkMode ? 'bg-gray-800' : 'bg-blue-50'
-                  }`}>
-                    <div className={`${
-                      darkMode ? 'text-blue-400 group-hover:text-blue-300' : 'text-blue-600 group-hover:text-blue-700'
-                    } transition-colors duration-500 transform group-hover:rotate-12`}>
-                      {service.icon}
+              <TiltedCard
+                imageSrc={svc.imageSrc}
+                altText={svc.title}
+                captionText={svc.title}
+                containerHeight="380px"
+                containerWidth="100%"
+                imageHeight="380px"
+                imageWidth="100%"
+                rotateAmplitude={10}
+                scaleOnHover={1.03}
+                showMobileWarning={false}
+                showTooltip
+                displayOverlayContent
+                overlayContent={
+                  <div className="sv-tilted-overlay">
+                    {/* Icon */}
+                    <div className="sv-icon-wrap">{svc.icon}</div>
+
+                    {/* Title */}
+                    <h3 className="sv-card-title">{svc.title}</h3>
+
+                    {/* Accent divider */}
+                    <div className="sv-card-divider" />
+
+                    {/* Description */}
+                    <p className="sv-card-desc">{svc.description}</p>
+
+                    {/* Skill tags */}
+                    <div className="sv-tags">
+                      {svc.skills.map((sk, i) => (
+                        <span key={i} className="sv-tag">{sk}</span>
+                      ))}
                     </div>
+
+                    {/* Ghost number */}
+                    <span className="sv-card-num" aria-hidden="true">{svc.number}</span>
                   </div>
-                </div>
-
-                {/* Title */}
-                <h3 className={`text-xl sm:text-2xl font-bold mb-3 ${
-                  darkMode 
-                    ? 'text-white group-hover:text-blue-400' 
-                    : 'text-gray-900 group-hover:text-blue-600'
-                } transition-colors duration-300`}>
-                  {service.title}
-                </h3>
-
-                {/* Description */}
-                <p className={`mb-4 ${
-                  darkMode ? 'text-gray-400 group-hover:text-gray-300' : 'text-gray-600 group-hover:text-gray-700'
-                } transition-colors duration-300`}>
-                  {service.description}
-                </p>
-
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {service.skills.map((skill, i) => (
-                    <span
-                      key={i}
-                      className={`px-3 py-1 text-sm rounded-full transition-all duration-300
-                        hover:scale-105 ${
-                          darkMode 
-                            ? 'bg-gray-700 text-blue-400 border-gray-600 group-hover:border-blue-500 group-hover:bg-gray-600' 
-                            : 'bg-blue-50 text-blue-600 border-blue-100 group-hover:border-blue-200 group-hover:bg-blue-100'
-                        } border`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Number */}
-                <div className="flex justify-between items-center">
-                  <span className={`text-5xl sm:text-6xl font-bold transition-colors duration-500 ${
-                    darkMode 
-                      ? 'text-gray-400 group-hover:text-blue-400' 
-                      : 'text-gray-400 group-hover:text-blue-400'
-                  }`}>
-                    {service.number}
-                  </span>
-                </div>
-              </div>
-
-              {/* Card Effects */}
-              <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-                darkMode 
-                  ? 'bg-gradient-to-br from-blue-900/20 to-transparent' 
-                  : 'bg-gradient-to-br from-blue-50 to-transparent'
-              }`}></div>
+                }
+              />
             </div>
           ))}
         </div>
+
+
+
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Services 
+export default Services;

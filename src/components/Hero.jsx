@@ -1,110 +1,90 @@
-import React, { useEffect, useRef } from 'react'
-import { useTheme } from '../context/ThemeContext'
-import AnimatedBackground from '../context/Animation'
+import React from 'react';
+import '../styles/portfolio.css';
+import AnimatedCube from '../context/AnimatedCube';
+import PageBackground from '../context/PageBackground';
+import ScrambledText from '../reactBitsComp/ScrambledText';
+import Lanyard from '../reactBitsComp/Lanyard';
 
-const Hero = () => {
-  const canvasRef = useRef(null);
-  const { darkMode } = useTheme();
+const Hero = () => (
+  <section className="hv-root" id="hero">
 
-  
-  return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      <AnimatedBackground />
-           
-      {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
-        <div className="text-center">
-          {/* Animated Welcome Text */}
-          <div className="overflow-hidden mb-4 mt-20">
-            <p className="text-lg sm:text-xl text-blue-500 font-medium transform animate-fade-in-up">
-              Welcome to my portfolio
-            </p>
-          </div>
+    {/* ── Shared bg layers: glows + vignette + hatch + particles ── */}
+    <PageBackground hatchTR hatchBL={false} hatchLM />
 
-          {/* Main Title */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold leading-tight tracking-tight mb-6">
-            <div className="overflow-hidden mb-4">
-              <div className="animate-slide-down">
-                <span className={`inline-block ${darkMode ? 'text-white' : 'text-gray-900'}`}>HI...</span>
-                <span className="inline-block mx-2 text-blue-500 animate-pulse"></span>
-                <span className={`inline-block ${darkMode ? 'text-white' : 'text-gray-900'}`}>I'M</span>
-              </div>
-            </div>
-            
-            <div className="overflow-hidden mb-4">
-              <div className="animate-slide-down" style={{ animationDelay: '0.2s' }}>
-                <span className={`${darkMode ? 'text-white hover:text-blue-400' : 'text-gray-900 hover:text-blue-600'} transition-colors duration-500`}>
-                  AMIT KUMAR YADAV
-                </span>
-              </div>
-            </div>
+    {/* ── Ghost outline text ── */}
+    <div className="hv-ghost-wrap" aria-hidden="true">
+      <span className="hv-ghost-text">AMIT&nbsp;KUMAR</span>
+    </div>
 
-            <div className="overflow-hidden mb-4">
-              <div className="animate-slide-down" style={{ animationDelay: '0.4s' }}>
-                <span className="text-blue-500">
-                  MERN STACK DEVELOPER
-                </span>
-              </div>
-            </div>
+    {/* ── Top-left cube ── */}
+    <AnimatedCube
+      style={{ top: '30px', left: '300px' }}
+      floatDir="up"
+      floatDuration="7s"
+      spinDuration="10s"
+    />
 
-            {/* <div className="overflow-hidden">
-              <div className="animate-slide-down" style={{ animationDelay: '0.6s' }}>
-                <span className="text-blue-600 hover:text-blue-700 transition-colors duration-500">
-                  
-                </span>
-              </div>
-            </div> */}
-          </h1>
+    {/* ── Bottom-right cube ── */}
+    <AnimatedCube
+      style={{ bottom: '20px', right: '200px' }}
+      floatDir="up"
+      floatDuration="8s"
+      spinDuration="12s"
+    />
 
-          {/* Description */}
-          <div className="max-w-3xl mx-auto space-y-6 animate-fade-in" style={{ animationDelay: '0.8s' }}>
-            <p className={`text-lg sm:text-xl ${darkMode ? 'text-gray-300' : 'text-gray-600'} leading-relaxed`}>
-              Enthusiastic Full Stack Developer with expertise in MERN stack. BCA graduate with a passion for building interactive, responsive websites and ensuring seamless user experiences.
-            </p>
+    {/* ── Lanyard — left corner me absolutely positioned ── */}
+    <div style={{
+      position: 'absolute',
+      top: 0,
+      left: '-10%',
+      width: '45%',
+      height: '100%',
+      zIndex: 9,
+      pointerEvents: 'auto',
+    }}>
+      <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
+    </div>
 
-            <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
-              <a 
-                href="mailto:ameykumar76@gmail.com" 
-                className="group relative px-8 py-4 bg-blue-500 hover:bg-blue-600 rounded-full inline-flex items-center transition-all duration-300"
-              >
-                <span className="relative flex items-center space-x-2">
-                  <span className="text-lg text-white">Contact Me</span>
-                  <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </span>
-              </a>
+    {/* ── Main content — FIXED position so ScrambledText doesn't shift it ── */}
+    <div className="hv-content">
+      <h1 className="hv-name">AMIT KUMAR YADAV</h1>
+      <p className="hv-subtitle">MERN&nbsp;STACK&nbsp;DEVELOPER</p>
 
-              <a 
-                href="tel:+919315264682" 
-                className={`group relative px-8 py-4 bg-transparent rounded-full inline-flex items-center 
-                  ${darkMode 
-                    ? 'border border-blue-400 hover:border-blue-300 hover:bg-gray-800' 
-                    : 'border border-blue-200 hover:border-blue-500 hover:bg-blue-50'
-                  }`}
-              >
-                <span className="relative flex items-center space-x-2">
-                  <svg className={`w-5 h-5 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className={`text-lg ${darkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-600 group-hover:text-gray-900'} transition-colors`}>
-                    +91-9315264682
-                  </span>
-                </span>
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg className={`w-6 h-6 ${darkMode ? 'text-gray-500' : 'text-gray-400'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
-        </div>
+      {/* ScrambledText — absolutely positioned so it doesn't affect flex layout */}
+      <div style={{
+        position: 'absolute',
+        top: 'calc(70% + 68px)',   /* subtitle ke theek neeche */
+        left: '50%',
+        transform: 'translateX(-50%)',
+        zIndex: 10,
+        width: 'min(600px, 80vw)',
+        textAlign: 'center',
+      }}>
+        <ScrambledText
+          radius={120}
+          duration={1.2}
+          speed={0.5}
+          scrambleChars=".:"
+        >
+          Enthusiastic Full Stack Developer with expertise in MERN stack. BCA graduate with a passion for building interactive, responsive websites and ensuring seamless user experiences.
+        </ScrambledText>
       </div>
-    </section>
-  )
-}
 
-export default Hero 
+      {/* hv-years — ScrambledText ke neeche, absolute position se */}
+      <div className="hv-years" style={{
+        position: 'absolute',
+        top: 'calc(50% + 200px)',  /* ScrambledText ke neeche */
+        left: '25%',
+        transform: 'translateX(-50%)',
+        zIndex: 10,
+      }}>
+        <span className="hv-year-num">2021</span>
+        <div className="hv-year-line" />
+        <span className="hv-year-num">2026</span>
+      </div>
+    </div>
+
+  </section>
+);
+
+export default Hero;
