@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import '../styles/portfolio.css';
 import PageBackground from '../context/PageBackground';
 import TiltedCard from '../reactBitsComp/TiltedCard';
+import AnimatedCube from '../context/AnimatedCube';
 
 
 /* Services data */
@@ -10,7 +11,7 @@ const SERVICES = [
     id: 1, number: '01',
     title: 'Frontend Development',
     description: 'Building fast, responsive, and visually rich UIs with React.js, HTML5, CSS3, and modern JavaScript.',
-    skills: ['React.js', 'HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI/UX'],
+    skills: ['React.js', 'HTML5', 'CSS3', 'JavaScript', 'TypeScript', 'Next.js', 'Responsive Design', 'UI/UX'],
     imageSrc: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=300&h=300&fit=crop',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -35,7 +36,7 @@ const SERVICES = [
     id: 3, number: '03',
     title: 'Cloud & DevOps',
     description: 'Deploying and managing cloud infrastructure with AWS EC2, S3, and automated CI/CD pipelines.',
-    skills: ['AWS EC2', 'AWS S3', 'GitHub Actions', 'CI/CD', 'Cloud Architecture', 'DevOps'],
+    skills: ['AWS EC2', 'AWS S3', , 'GitHub Actions', 'CI/CD', 'Cloud Architecture', 'DevOps'],
     imageSrc: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300&h=300&fit=crop',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -71,6 +72,20 @@ const Services = () => {
 
       {/* ── All shared background layers ── */}
       <PageBackground hatchTR hatchBL />
+
+      <AnimatedCube
+        style={{ top: '60px', left: '4%' }}
+        floatDir="up"
+        floatDuration="8s"
+        spinDuration="11s"
+      />
+
+      <AnimatedCube
+        style={{ bottom: '80px', right: '4%' }}
+        floatDir="down"
+        floatDuration="12s"
+        spinDuration="18s"
+      />
 
       {/* ── Ghost outline text (section-specific position) ── */}
       <div className="sv-ghost-wrap" aria-hidden="true">

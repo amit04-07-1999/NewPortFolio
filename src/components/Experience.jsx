@@ -1,272 +1,181 @@
 import React, { useEffect, useRef } from 'react';
+import '../styles/portfolio.css';
+import PageBackground from '../context/PageBackground';
+import TiltedCard from '../reactBitsComp/TiltedCard';
+import AnimatedCube from '../context/AnimatedCube';
 import Header from './Header';
 import Footer from './Footer';
-import { useTheme } from '../context/ThemeContext';
-import AnimatedBackground from '../context/Animation';
+import ContactForm from './ContactForm';
+
+/* Experiences data */
+const EXPERIENCES = [
+  {
+    id: 1,
+    number: '01',
+    role: "Full Stack Developer",
+    company: "Pizeonfly Pvt Ltd",
+    location: "New Delhi, Sant Nagar",
+    duration: "March 2024 - Present",
+    description: "Leading full-stack development projects and mentoring junior developers. Developed and maintained multiple CRM systems using MERN stack.",
+    responsibilities: [
+      "Developed and maintained multiple CRM systems using MERN stack",
+      "Implemented secure authentication and authorization systems",
+      "Optimized database queries and API performance",
+    ],
+    skills: ["React.js", "Node.js", "MongoDB", "AWS", "Socket.io"],
+    imageSrc: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=500&h=500&fit=crop', // Office setting
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z" />
+      </svg>
+    ),
+  },
+  {
+    id: 2,
+    number: '02',
+    role: "Full Stack Developer",
+    company: "TechNinza Pvt Ltd",
+    location: "Haryana, Gurgaon",
+    duration: "Feb 2023 - Jan 2024",
+    description: "Worked on multiple client projects and internal tools development. Built responsive web applications using React.js and Node.js.",
+    responsibilities: [
+      "Built responsive web applications using React.js",
+      "Developed RESTful APIs using Node.js and Express",
+      "Implemented MongoDB database schemas and queries",
+    ],
+    skills: ["React.js", "Node.js", "Express.js", "MongoDB", "REST APIs"],
+    imageSrc: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=500&h=500&fit=crop', // Modern office
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+        <path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16" />
+      </svg>
+    ),
+  }
+];
 
 const Experience = () => {
-  const { darkMode } = useTheme();
-  const sectionRef = useRef(null);
-  const experienceRef = useRef([]);
+  const cardRefs = useRef([]);
 
+  /* Scroll-triggered card reveal */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100');
-            entry.target.classList.add('translate-y-0');
+            entry.target.classList.add('ex-visible');
+            observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    experienceRef.current.forEach((exp) => {
-      if (exp) {
-        observer.observe(exp);
-      }
-    });
-
+    cardRefs.current.forEach((el) => { if (el) observer.observe(el); });
     return () => observer.disconnect();
   }, []);
 
-  const experiences = [
-    {
-      id: 1,
-      role: "Full Stack Developer",
-      company: "Pizeonfly Pvt Ltd",
-      location: "New Delhi, Sant Nagar",
-      duration: "March 2024 - Present",
-      description: "Leading full-stack development projects and mentoring junior developers.",
-      responsibilities: [
-        "Developed and maintained multiple CRM systems using MERN stack",
-        "Implemented secure authentication and authorization systems",
-        "Optimized database queries and API performance",
-        "Integrated third-party services and APIs",
-        "Conducted code reviews and provided technical guidance"
-      ],
-      projects: [
-        {
-          name: "FIC CRM",
-          description: "A comprehensive loan management system with multi-user roles",
-          tech: ["React.js", "Node.js", "MongoDB", "AWS"]
-        },
-        {
-          name: "Pizeonfly CRM",
-          description: "Project and task management platform with real-time updates",
-          tech: ["React.js", "Node.js", "Socket.io", "AWS"]
-        }
-      ]
-    },
-    {
-      id: 2,
-      role: "Full Stack Developer",
-      company: "TechNinza Pvt Ltd",
-      location: "Haryana, Gurgaon",
-      duration: "Feb 2023 - Jan 2024",
-      description: "Worked on multiple client projects and internal tools development.",
-      responsibilities: [
-        "Built responsive web applications using React.js",
-        "Developed RESTful APIs using Node.js and Express",
-        "Implemented MongoDB database schemas and queries",
-        "Created mobile app backends and vendor panels",
-        "Collaborated with UI/UX designers for optimal user experience"
-      ],
-      projects: [
-        {
-          name: "Caross Project",
-          description: "User-friendly web platform with seamless interactions",
-          tech: ["React.js", "Node.js", "MongoDB"]
-        },
-        {
-          name: "EZI Mobile Travel App",
-          description: "Scalable backend system for a travel application",
-          tech: ["Node.js", "Express.js", "MongoDB"]
-        }
-      ]
-    }
-  ];
-
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900/50' : 'bg-gray-50'}`}>
-      <div className="fixed inset-0 z-0">
-        <AnimatedBackground />
-      </div>
-      <div className="relative z-10">
-        <Header />
-        <main className="py-16">
-          <section 
-            ref={sectionRef}
-            className="container mx-auto px-4 opacity-0 translate-y-10 transition-all duration-1000"
-          >
-            {/* Section Title */}
-            <div className="text-center mb-16">
-              <h1 className={`text-4xl md:text-5xl font-bold mb-4 relative group inline-block ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>
-                Professional Experience
-                <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
-              </h1>
-              <p className={`text-lg max-w-3xl mx-auto ${
-                darkMode ? 'text-gray-400' : 'text-gray-600'
-              }`}>
-                My journey as a Full Stack Developer, building innovative solutions and gaining valuable expertise
-              </p>
-            </div>
+    <div className="experience-page">
+      <Header />
+      <section className="ex-root" id="experience">
+        {/* ── All shared background layers ── */}
+        <PageBackground hatchTR hatchBL />
 
-            {/* Experience Timeline */}
-            <div className="max-w-4xl mx-auto">
-              {experiences.map((exp, index) => (
-                <div
-                  key={exp.id}
-                  ref={(el) => (experienceRef.current[index] = el)}
-                  className={`relative rounded-xl p-8 mb-12 opacity-0 translate-y-10 transition-all duration-1000 border hover:shadow-lg ${
-                    darkMode 
-                      ? 'bg-gray-800 border-gray-700 hover:border-blue-400' 
-                      : 'bg-white border-gray-200 hover:border-blue-200'
-                  }`}
-                  style={{ transitionDelay: `${index * 200}ms` }}
-                >
-                  {/* Company and Duration */}
-                  <div className="flex flex-col md:flex-row justify-between items-start mb-6">
-                    <div>
-                      <h2 className={`text-2xl font-bold mb-2 ${
-                        darkMode ? 'text-blue-400' : 'text-blue-600'
-                      }`}>{exp.role}</h2>
-                      <h3 className={`text-xl font-semibold ${
-                        darkMode ? 'text-white' : 'text-gray-900'
-                      }`}>{exp.company}</h3>
-                      <p className={`${
-                        darkMode ? 'text-gray-400' : 'text-gray-600'
-                      }`}>{exp.location}</p>
+        {/* ── Floating Cubes ── */}
+        <AnimatedCube
+          style={{ top: '140px', left: '4%' }}
+          floatDir="up"
+          floatDuration="9s"
+          spinDuration="12s"
+        />
+        <AnimatedCube
+          style={{ bottom: '100px', right: '4%' }}
+          floatDir="down"
+          floatDuration="11s"
+          spinDuration="15s"
+        />
+
+        {/* ── Ghost outline text ── */}
+        <div className="ex-ghost-wrap" aria-hidden="true">
+          <span className="ex-ghost-text">EXPERIENCE</span>
+        </div>
+
+        {/* ── Content ── */}
+        <div className="ex-inner">
+          {/* Header */}
+          <div className="ex-header">
+            <p className="ex-label">My Journey</p>
+            <h2 className="ex-title">WORK EXPERIENCE</h2>
+            <div className="ex-title-line" />
+            <p className="ex-desc">
+              Building innovative solutions and gaining expertise across various
+              tech stacks and professional environments.
+            </p>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="ex-grid">
+            {EXPERIENCES.map((exp, idx) => (
+              <div
+                key={exp.id}
+                className="ex-card"
+                ref={(el) => (cardRefs.current[idx] = el)}
+                style={{ animationDelay: `${idx * 180}ms` }}
+              >
+                <TiltedCard
+                  altText={exp.role}
+                  captionText={exp.company}
+                  containerHeight="450px"
+                  containerWidth="100%"
+                  imageHeight="450px"
+                  imageWidth="100%"
+                  rotateAmplitude={8}
+                  scaleOnHover={1.02}
+                  showMobileWarning={false}
+                  showTooltip
+                  displayOverlayContent
+                  overlayContent={
+                    <div className="ex-tilted-overlay">
+                      {/* Icon */}
+                      <div className="ex-icon-wrap">{exp.icon}</div>
+
+                      {/* Role & Company */}
+                      <h3 className="ex-card-title">{exp.role}</h3>
+                      <p className="ex-company">{exp.company}</p>
+                      <p className="ex-duration">{exp.duration}</p>
+
+                      {/* Accent divider */}
+                      <div className="ex-card-divider" />
+
+                      {/* Brief description */}
+                      <p className="ex-card-desc">{exp.description}</p>
+
+                      {/* Key Responsibilities */}
+                      <ul className="ex-responsibilities">
+                        {exp.responsibilities.slice(0, 3).map((res, i) => (
+                          <li key={i}>{res}</li>
+                        ))}
+                      </ul>
+
+                      {/* Tags */}
+                      <div className="ex-tags">
+                        {exp.skills.map((sk, i) => (
+                          <span key={i} className="ex-tag">{sk}</span>
+                        ))}
+                      </div>
+
+                      {/* Ghost number */}
+                      <span className="ex-card-num" aria-hidden="true">{exp.number}</span>
                     </div>
-                    <div className="mt-4 md:mt-0">
-                      <span className={`px-4 py-2 rounded-full text-sm font-medium ${
-                        darkMode 
-                          ? 'bg-gray-700 text-blue-400' 
-                          : 'bg-blue-50 text-blue-600'
-                      }`}>
-                        {exp.duration}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Description */}
-                  <p className={`mb-6 leading-relaxed ${
-                    darkMode ? 'text-gray-400' : 'text-gray-700'
-                  }`}>
-                    {exp.description}
-                  </p>
-
-                  {/* Responsibilities */}
-                  <div className="mb-8">
-                    <h4 className={`text-lg font-semibold mb-4 ${
-                      darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Key Responsibilities:</h4>
-                    <ul className="space-y-3">
-                      {exp.responsibilities.map((resp, i) => (
-                        <li key={i} className="flex items-start">
-                          <svg className={`w-5 h-5 mt-1 mr-3 ${
-                            darkMode ? 'text-blue-400' : 'text-blue-500'
-                          }`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className={`${
-                            darkMode ? 'text-gray-400' : 'text-gray-600'
-                          }`}>{resp}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Projects */}
-                  <div>
-                    <h4 className={`text-lg font-semibold mb-4 ${
-                      darkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Notable Projects:</h4>
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {exp.projects.map((project, i) => (
-                        <div 
-                          key={i}
-                          className={`rounded-lg p-6 border transition-all duration-300 ${
-                            darkMode 
-                              ? 'bg-gray-700 border-gray-600 hover:border-blue-400' 
-                              : 'bg-gray-50 border-gray-100 hover:border-blue-200'
-                          }`}
-                        >
-                          <h5 className={`text-lg font-semibold mb-2 ${
-                            darkMode ? 'text-white' : 'text-gray-900'
-                          }`}>{project.name}</h5>
-                          <p className={`mb-4 ${
-                            darkMode ? 'text-gray-400' : 'text-gray-600'
-                          }`}>{project.description}</p>
-                          <div className="flex flex-wrap gap-2">
-                            {project.tech.map((tech, j) => (
-                              <span 
-                                key={j}
-                                className={`px-3 py-1 text-sm rounded-full border ${
-                                  darkMode 
-                                    ? 'bg-gray-800 text-blue-400 border-gray-600' 
-                                    : 'bg-white text-blue-600 border-blue-100'
-                                }`}
-                              >
-                                {tech}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Skills Section */}
-            <div className="mt-16 text-center">
-              <h2 className={`text-3xl font-bold mb-8 ${
-                darkMode ? 'text-white' : 'text-gray-900'
-              }`}>Technical Expertise</h2>
-              <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                {[
-                  "React.js", "Node.js", "MongoDB", "Express.js",
-                  "JavaScript", "HTML5/CSS3", "AWS", "RESTful APIs",
-                  "Git", "WebRTC", "Material UI", "Socket.io",
-                  "Responsive Design", "TypeScript", "Docker", "CI/CD"
-                ].map((skill, index) => (
-                  <div 
-                    key={index}
-                    className={`group relative rounded-lg p-4 border transition-all duration-500 transform hover:scale-105 hover:-translate-y-1 ${
-                      darkMode 
-                        ? 'bg-gradient-to-br from-gray-800 via-gray-800 to-gray-900 border-gray-700 hover:border-blue-500 hover:shadow-[0_0_15px_rgba(59,130,246,0.5)]' 
-                        : 'bg-gradient-to-br from-white via-gray-50 to-gray-100 border-gray-200 hover:border-blue-400 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)]'
-                    }`}
-                  >
-                    <div className={`absolute inset-0 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500 ${
-                      darkMode 
-                        ? 'bg-gradient-to-br from-blue-500/10 to-purple-500/10' 
-                        : 'bg-gradient-to-br from-blue-400/10 to-purple-400/10'
-                    }`}></div>
-                    <span className={`font-medium relative z-10 ${
-                      darkMode 
-                        ? 'text-gray-300 group-hover:text-blue-400' 
-                        : 'text-gray-900 group-hover:text-blue-600'
-                        
-                    } transition-colors duration-300`}>{skill}</span>
-                  </div>
-                ))}
+                  }
+                />
               </div>
-            </div>
-          </section>
-        </main>
-
-        <Footer />
-      </div>
+            ))}
+          </div>
+        </div>
+      </section>
+      <ContactForm />
+      <Footer />
     </div>
   );
 };

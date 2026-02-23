@@ -1,11 +1,72 @@
 import React, { useEffect, useRef } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import { useTheme } from '../context/ThemeContext';
-import AnimatedBackground from '../context/Animation';
+import ContactForm from './ContactForm';
+import '../styles/portfolio.css';
+import PageBackground from '../context/PageBackground';
+import AnimatedCube from '../context/AnimatedCube';
+
+const projects = [
+  {
+    id: 1,
+    title: "Chat Application",
+    description: "A real-time chat application with private messaging and group chat features",
+    longDescription: "Built a comprehensive chat platform that enables users to communicate in real-time. The application supports both private messaging and group chats, with features like message status, typing indicators, and file sharing.",
+    image: "Images/chatapp.png",
+    demoLink: "https://chatfrontend-nine.vercel.app/",
+    githubLink: "https://github.com/amit04-07-1999/chatfrontend",
+    features: [
+      "Real-time messaging using Socket.io",
+      "Private and group chat functionality",
+      "User authentication and authorization",
+      "Message status indicators",
+      "File sharing capabilities",
+      "Responsive design for all devices"
+    ],
+    technologies: {
+      frontend: ["React.js", "Socket.io-client", "Tailwind CSS", "Redux"],
+      backend: ["Node.js", "Express.js", "Socket.io", "MongoDB"],
+      deployment: ["Vercel", "MongoDB Atlas"]
+    },
+    challenges: [
+      "Implementing real-time communication with WebSocket",
+      "Managing complex state with multiple chat rooms",
+      "Handling file uploads and storage",
+      "Ensuring message delivery and status updates"
+    ]
+  },
+  {
+    id: 2,
+    title: "E-Commerce Platform",
+    description: "A full-featured e-commerce platform with product management and secure payments",
+    longDescription: "Developed a comprehensive e-commerce solution that provides a seamless shopping experience. The platform includes features like product categorization, cart management, secure payments, and order tracking.",
+    image: "Images/e-commerce.png",
+    demoLink: "https://rainbow-fox-1c79d5.netlify.app/",
+    githubLink: "https://github.com/amit04-07-1999/E-commerce",
+    features: [
+      "Product catalog with categories",
+      "Shopping cart functionality",
+      "Secure payment integration",
+      "User authentication",
+      "Order management",
+      "Admin dashboard",
+      "Responsive design"
+    ],
+    technologies: {
+      frontend: ["React.js", "Redux", "Material UI", "Stripe Elements"],
+      backend: ["Node.js", "Express.js", "MongoDB", "Stripe API"],
+      deployment: ["Netlify", "Heroku"]
+    },
+    challenges: [
+      "Implementing secure payment processing",
+      "Managing complex product inventory",
+      "Building responsive product layouts",
+      "Optimizing performance with large catalogs"
+    ]
+  }
+];
 
 const Projects = () => {
-  const { darkMode } = useTheme();
   const sectionRef = useRef(null);
   const projectsRef = useRef([]);
 
@@ -14,246 +75,266 @@ const Projects = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('opacity-100');
-            entry.target.classList.add('translate-y-0');
+            entry.target.classList.add('pr-pg-visible');
           }
         });
       },
-      { threshold: 0.1 }
+      { threshold: 0.08 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    projectsRef.current.forEach((project) => {
-      if (project) {
-        observer.observe(project);
-      }
-    });
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    projectsRef.current.forEach((el) => { if (el) observer.observe(el); });
     return () => observer.disconnect();
   }, []);
 
-  const projects = [
-    {
-      id: 1,
-      title: "Chat Application",
-      description: "A real-time chat application with private messaging and group chat features",
-      longDescription: "Built a comprehensive chat platform that enables users to communicate in real-time. The application supports both private messaging and group chats, with features like message status, typing indicators, and file sharing.",
-      image: "Images/chatapp.png",
-      demoLink: "https://chatfrontend-nine.vercel.app/",
-      githubLink: "https://github.com/amit04-07-1999/chatfrontend",
-      features: [
-        "Real-time messaging using Socket.io",
-        "Private and group chat functionality",
-        "User authentication and authorization",
-        "Message status indicators",
-        "File sharing capabilities",
-        "Responsive design for all devices"
-      ],
-      technologies: {
-        frontend: ["React.js", "Socket.io-client", "Tailwind CSS", "Redux"],
-        backend: ["Node.js", "Express.js", "Socket.io", "MongoDB"],
-        deployment: ["Vercel", "MongoDB Atlas"]
-      },
-      challenges: [
-        "Implementing real-time communication with WebSocket",
-        "Managing complex state with multiple chat rooms",
-        "Handling file uploads and storage",
-        "Ensuring message delivery and status updates"
-      ]
-    },
-    {
-      id: 2,
-      title: "E-Commerce Platform",
-      description: "A full-featured e-commerce platform with product management and secure payments",
-      longDescription: "Developed a comprehensive e-commerce solution that provides a seamless shopping experience. The platform includes features like product categorization, cart management, secure payments, and order tracking.",
-      image: "Images/e-commerce.png",
-      demoLink: "https://rainbow-fox-1c79d5.netlify.app/",
-      githubLink: "https://github.com/amit04-07-1999/E-commerce",
-      features: [
-        "Product catalog with categories",
-        "Shopping cart functionality",
-        "Secure payment integration",
-        "User authentication",
-        "Order management",
-        "Admin dashboard",
-        "Responsive design"
-      ],
-      technologies: {
-        frontend: ["React.js", "Redux", "Material UI", "Stripe Elements"],
-        backend: ["Node.js", "Express.js", "MongoDB", "Stripe API"],
-        deployment: ["Netlify", "Heroku"]
-      },
-      challenges: [
-        "Implementing secure payment processing",
-        "Managing complex product inventory",
-        "Building responsive product layouts",
-        "Optimizing performance with large catalogs"
-      ]
-    }
-  ];
-
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900/50' : 'bg-gray-50'}`}>
-      <div className="fixed inset-0 z-0">
-        <AnimatedBackground />
-      </div>
-      <div className="relative z-10">
-        <Header />
-        <main className="py-16 mb-10">
-          <section 
-            ref={sectionRef}
-            className="container mx-auto px-4 opacity-0 translate-y-10 transition-all duration-1000"
-          >
-            {/* Section Title */}
-            <div className="text-center mb-16">
-              <h1 className={`text-4xl md:text-5xl font-bold mb-4 relative group inline-block ${darkMode ? 'text-white' : 'text-gray-900'}`}>
-                Featured Projects
-                <div className="absolute -bottom-2 left-0 right-0 h-1 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-700"></div>
+    <div style={{ background: '#020608', minHeight: '100vh' }}>
+      <Header />
+
+      <section className="pr-root">
+        {/* Background decorators — same as other sections */}
+        <PageBackground hatchTR hatchBL />
+
+        {/* ── Floating Cubes ── */}
+        <AnimatedCube
+          style={{ top: '200px', left: '4%' }}
+          floatDir="down"
+          floatDuration="10s"
+          spinDuration="13s"
+        />
+        <AnimatedCube
+          style={{ bottom: '200px', right: '4%' }}
+          floatDir="up"
+          floatDuration="12s"
+          spinDuration="16s"
+        />
+
+        {/* ── Ghost outline text ── */}
+        <div className="pr-ghost-wrap" aria-hidden="true">
+          <span className="pr-ghost-text">PROJECTS</span>
+        </div>
+
+        <main style={{ position: 'relative', zIndex: 10 }}>
+          <div style={{ maxWidth: '1100px', margin: '0 auto', padding: '0 24px' }}>
+
+            {/* Section header */}
+            <div
+              ref={sectionRef}
+              className="pr-pg-fade"
+              style={{ textAlign: 'center', marginBottom: '64px' }}
+            >
+              <p style={{
+                display: 'inline-block',
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 'clamp(10px, 1.2vw, 13px)',
+                fontWeight: 600,
+                textTransform: 'uppercase',
+                letterSpacing: '8px',
+                color: 'rgba(29,161,242,0.85)',
+                marginBottom: '14px',
+                textShadow: '0 0 14px rgba(29,161,242,0.4)',
+              }}>
+                My Work
+              </p>
+              <h1 style={{
+                fontFamily: "'Bebas Neue', sans-serif",
+                fontSize: 'clamp(48px, 8vw, 100px)',
+                fontWeight: 900,
+                textTransform: 'uppercase',
+                letterSpacing: '4px',
+                color: '#ffffff',
+                lineHeight: 0.95,
+                margin: '0 0 20px',
+                textShadow: '0 2px 24px rgba(0,0,0,0.7)',
+              }}>
+                FEATURED PROJECTS
               </h1>
-              <p className={`text-lg max-w-3xl mx-auto ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                Showcasing my best work in web development using modern technologies and best practices
+              <div style={{
+                width: '60px', height: '2px',
+                background: 'linear-gradient(to right, transparent, #1da1f2, transparent)',
+                margin: '0 auto 18px',
+              }} />
+              <p style={{
+                fontFamily: "'Montserrat', sans-serif",
+                fontSize: 'clamp(13px, 1.4vw, 16px)',
+                fontWeight: 400,
+                color: 'rgba(255,255,255,0.42)',
+                maxWidth: '520px',
+                margin: '0 auto',
+                lineHeight: 1.7,
+                letterSpacing: '0.3px',
+              }}>
+                Showcasing my best work in web development using modern technologies and best practices.
               </p>
             </div>
 
-            {/* Projects Grid */}
-            <div className="max-w-7xl mx-auto space-y-24">
+            {/* Projects list */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '48px' }}>
               {projects.map((project, index) => (
                 <div
                   key={project.id}
                   ref={(el) => (projectsRef.current[index] = el)}
-                  className="opacity-0 translate-y-10 transition-all duration-1000"
-                  style={{ transitionDelay: `${index * 200}ms` }}
+                  className="pr-pg-fade"
+                  style={{ animationDelay: `${index * 150}ms` }}
                 >
-                  <div className={`rounded-2xl overflow-hidden border transition-all duration-300 ${darkMode ? 'bg-gray-800 border-gray-700 hover:border-blue-400 hover:shadow-blue-900/20' : 'bg-white border-gray-200 hover:border-blue-200 hover:shadow-xl'}`}>
-                    <div className="grid md:grid-cols-2 gap-8 p-8">
-                      {/* Project Image */}
-                      <div className="relative group">
-                        <div className="relative overflow-hidden rounded-xl">
-                          <img 
-                            src={project.image} 
-                            alt={project.title}
-                            className="w-full h-[300px] object-cover transform group-hover:scale-105 transition-transform duration-500"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <div className="absolute bottom-4 left-4 right-4 flex gap-4">
-                              <a 
-                                href={project.demoLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-4 py-2 bg-blue-500 text-white rounded-full text-sm hover:bg-blue-600 transition-colors duration-300"
-                                style={{ color: 'white' }}
-                              >
-                                Live Demo
-                              </a>
-                              {/* <a 
-                                href={project.githubLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="px-4 py-2 bg-gray-800 text-white rounded-full text-sm hover:bg-gray-900 transition-colors duration-300"
-                              >
-                                GitHub
-                              </a> */}
-                            </div>
-                          </div>
+                  {/* Project card */}
+                  <div style={{
+                    borderRadius: '20px',
+                    overflow: 'hidden',
+                    background: 'rgba(255,255,255,0.03)',
+                    border: '1px solid rgba(255,255,255,0.08)',
+                    backdropFilter: 'blur(12px)',
+                    WebkitBackdropFilter: 'blur(12px)',
+                    transition: 'border-color 0.45s ease, box-shadow 0.45s ease',
+                  }}
+                    onMouseEnter={e => {
+                      e.currentTarget.style.borderColor = 'rgba(29,161,242,0.55)';
+                      e.currentTarget.style.boxShadow = '0 0 32px rgba(29,161,242,0.28), 0 0 70px rgba(29,161,242,0.12)';
+                    }}
+                    onMouseLeave={e => {
+                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
+                  >
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }} className="pr-pg-grid">
+
+                      {/* Image side */}
+                      <div style={{ position: 'relative', overflow: 'hidden', minHeight: '300px' }}>
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          style={{
+                            width: '100%', height: '100%', minHeight: '300px',
+                            objectFit: 'cover',
+                            display: 'block',
+                            filter: 'brightness(0.65)',
+                            transition: 'filter 0.4s ease, transform 0.4s ease',
+                          }}
+                          onMouseEnter={e => { e.currentTarget.style.filter = 'brightness(0.85)'; e.currentTarget.style.transform = 'scale(1.04)'; }}
+                          onMouseLeave={e => { e.currentTarget.style.filter = 'brightness(0.65)'; e.currentTarget.style.transform = 'scale(1)'; }}
+                        />
+                        {/* Live Demo overlay */}
+                        <div style={{
+                          position: 'absolute', bottom: '20px', left: '20px',
+                          display: 'flex', gap: '10px',
+                        }}>
+                          <a
+                            href={project.demoLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style={{
+                              display: 'inline-flex', alignItems: 'center', gap: '6px',
+                              padding: '8px 18px', borderRadius: '50px',
+                              background: 'linear-gradient(135deg, #1da1f2 0%, #0d8fd8 100%)',
+                              color: '#fff',
+                              fontFamily: "'Montserrat', sans-serif",
+                              fontSize: '11px', fontWeight: 700,
+                              textDecoration: 'none', letterSpacing: '0.8px',
+                              textTransform: 'uppercase',
+                              boxShadow: '0 4px 16px rgba(29,161,242,0.40)',
+                              transition: 'all 0.3s ease',
+                            }}
+                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(29,161,242,0.52)'; }}
+                            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 16px rgba(29,161,242,0.40)'; }}
+                          >
+                            Live Demo
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                              <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
+                            </svg>
+                          </a>
                         </div>
                       </div>
 
-                      {/* Project Details */}
-                      <div className="space-y-6">
+                      {/* Details side */}
+                      <div style={{ padding: '36px 32px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+
+                        {/* Title */}
                         <div>
-                          <h2 className={`text-3xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{project.title}</h2>
-                          <p className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} leading-relaxed`}>{project.longDescription}</p>
+                          <h2 style={{
+                            fontFamily: "'Montserrat', sans-serif",
+                            fontSize: 'clamp(18px, 2vw, 24px)',
+                            fontWeight: 800,
+                            color: '#F1F1F1',
+                            textTransform: 'uppercase',
+                            letterSpacing: '1.5px',
+                            margin: '0 0 10px',
+                            transition: 'color 0.3s ease',
+                          }}>
+                            {project.title}
+                          </h2>
+                          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(to right, #1da1f2, rgba(29,161,242,0.2))', marginBottom: '14px' }} />
+                          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
+                            {project.longDescription}
+                          </p>
                         </div>
 
                         {/* Key Features */}
                         <div>
-                          <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Key Features</h3>
-                          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '12px' }}>
+                            Key Features
+                          </h3>
+                          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                             {project.features.map((feature, i) => (
-                              <li key={i} className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} flex items-center`}>
-                                <svg className="w-5 h-5 text-blue-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                                </svg>
+                              <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.60)', lineHeight: 1.5 }}>
+                                <span style={{ color: '#1da1f2', flexShrink: 0, marginTop: '2px' }}>→</span>
                                 {feature}
                               </li>
                             ))}
                           </ul>
                         </div>
 
-                        {/* Technologies Used */}
+                        {/* Tech tags */}
                         <div>
-                          <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Technologies Used</h3>
-                          <div className="space-y-4">
-                            <div>
-                              <h4 className={`text-sm font-medium mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Frontend</h4>
-                              <div className="flex flex-wrap gap-2">
-                                {project.technologies.frontend.map((tech, i) => (
-                                  <span 
-                                    key={i}
-                                    className={`px-3 py-1 text-sm rounded-full border ${darkMode ? 'bg-blue-950 text-blue-400 border-blue-900' : 'bg-blue-50 text-blue-600 border-blue-100'}`}
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                            <div>
-                              <h4 className={`text-sm font-medium mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Backend</h4>
-                              <div className="flex flex-wrap gap-2">
-                                {project.technologies.backend.map((tech, i) => (
-                                  <span 
-                                    key={i}
-                                    className={`px-3 py-1 text-sm rounded-full border ${darkMode ? 'bg-gray-900 text-gray-400 border-gray-700' : 'bg-gray-50 text-gray-600 border-gray-200'}`}
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
-                            <div>
-                              <h4 className={`text-sm font-medium mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>Deployment</h4>
-                              <div className="flex flex-wrap gap-2">
-                                {project.technologies.deployment.map((tech, i) => (
-                                  <span 
-                                    key={i}
-                                    className={`px-3 py-1 text-sm rounded-full border ${darkMode ? 'bg-green-950 text-green-400 border-green-900' : 'bg-green-50 text-green-600 border-green-100'}`}
-                                  >
-                                    {tech}
-                                  </span>
-                                ))}
-                              </div>
-                            </div>
+                          <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '10px' }}>
+                            Technologies
+                          </h3>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                            {[...project.technologies.frontend, ...project.technologies.backend, ...project.technologies.deployment].map((tech, i) => (
+                              <span key={i} style={{
+                                fontFamily: "'Montserrat', sans-serif",
+                                fontSize: '10px', fontWeight: 700,
+                                letterSpacing: '0.7px', textTransform: 'uppercase',
+                                color: 'rgb(29,185,242)',
+                                background: 'rgba(29,178,242,0.14)',
+                                border: '1px solid rgba(29,161,242,0.35)',
+                                borderRadius: '5px', padding: '3px 9px',
+                                whiteSpace: 'nowrap',
+                              }}>
+                                {tech}
+                              </span>
+                            ))}
                           </div>
                         </div>
 
-                        {/* Challenges */}
-                        <div>
-                          <h3 className={`text-xl font-semibold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>Technical Challenges</h3>
-                          <ul className="space-y-2">
-                            {project.challenges.map((challenge, i) => (
-                              <li key={i} className={`${darkMode ? 'text-gray-400' : 'text-gray-600'} flex items-start`}>
-                                <svg className="w-5 h-5 text-blue-500 mr-2 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                </svg>
-                                {challenge}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-          </section>
+          </div>
         </main>
+      </section>
+      <ContactForm />
 
-        <Footer />
-      </div>
+      <Footer />
+
+      {/* Responsive grid style */}
+      <style>{`
+        .pr-pg-fade {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .pr-pg-fade.pr-pg-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        @media (max-width: 768px) {
+          .pr-pg-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

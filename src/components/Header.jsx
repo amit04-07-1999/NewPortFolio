@@ -1,176 +1,188 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { useTheme } from '../context/ThemeContext'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import '../styles/portfolio.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const navLinkStyle = {
+    fontFamily: "'Montserrat', sans-serif",
+    fontSize: '13px',
+    fontWeight: 600,
+    letterSpacing: '1.5px',
+    textTransform: 'uppercase',
+    color: 'rgba(255,255,255,0.75)',
+    textDecoration: 'none',
+    position: 'relative',
+    transition: 'color 0.3s ease',
+  };
+
   return (
-    <header className={`fixed top-0 w-full z-50 transition-all duration-300 
-      ${isScrolled 
-        ? darkMode 
-          ? 'bg-gray-900/95 backdrop-blur-lg shadow-lg py-4' 
-          : 'bg-white/95 backdrop-blur-lg shadow-sm py-4' 
-        : 'bg-transparent py-6'
-      }`}>
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="relative group">
-            {darkMode ? (
-              <img src="Images/darkamit.png" alt="Logo" className="w-15 h-10 inline-block" />
-            ) : (
-              <img src="Images/amit.png" alt="Logo" className="w-15 h-10 inline-block" />
-            )}
-            {/* <span className="text-xl md:text-xl font-bold text-gray-900"style={{ fontFamily: 'Pacifico, cursive' }}>
-              mit
-            </span> */}
-            <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></div>
-          </Link>
+    <header
+      style={{
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        zIndex: 100,
+        transition: 'all 0.3s ease',
+        background: isScrolled
+          ? 'rgba(2, 6, 8, 0.92)'
+          : 'transparent',
+        backdropFilter: isScrolled ? 'blur(14px)' : 'none',
+        WebkitBackdropFilter: isScrolled ? 'blur(14px)' : 'none',
+        borderBottom: isScrolled
+          ? '1px solid rgba(255,255,255,0.07)'
+          : '1px solid transparent',
+        padding: isScrolled ? '14px 0' : '20px 0',
+      }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className={`relative group ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} transition-colors`}
-            >
-              <span className={`${darkMode ? 'text-gray-300' : ''}`}>Home</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></div>
-            </Link>
-            <Link
-              to="/experience"
-              className={`relative group ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} transition-colors`}
-            >
-              <span className={`${darkMode ? 'text-gray-300' : ''}`}>Experience</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></div>
-            </Link>
-            <Link
-              to="/projects"
-              className={`relative group ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-700 hover:text-gray-900'} transition-colors`}
-            >
-              <span className={`${darkMode ? 'text-gray-300' : ''}`}>Projects</span>
-              <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></div>
-            </Link>
-          </nav>
+        {/* Logo */}
+        <Link to="/" style={{ textDecoration: 'none', flexShrink: 0 }}>
+          {/* <img src="Images/darkamit.png" alt="Amit Kumar Logo" style={{ height: '36px', display: 'block' }} /> */}
+        </Link>
 
-          {/* Desktop Contact and Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
-            {/* Theme Toggle Button */}
-            <div onClick={toggleTheme} className="cursor-pointer">
-              {darkMode ? (
-                <svg className="w-6 h-6 text-yellow-400 hover:text-yellow-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                    d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
-                  />
-                </svg>
-              ) : (
-                <svg className="w-6 h-6 text-gray-600 hover:text-gray-800 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                    d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" 
-                  />
-                </svg>
-              )}
-            </div>
-          </div>
+        {/* Desktop Nav */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '36px' }} className="hdr-desktop-nav">
+          {[
+            { label: 'Home', to: '/' },
+            { label: 'Experience', to: '/experience' },
+            { label: 'Projects', to: '/projects' },
+          ].map(({ label, to }) => (
+            <Link key={to} to={to} style={navLinkStyle}
+              onMouseEnter={e => { e.currentTarget.style.color = '#1da1f2'; }}
+              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)'; }}
+            >
+              {label}
+              {/* Underline bar */}
+              <span style={{
+                position: 'absolute', bottom: '-4px', left: 0,
+                height: '1.5px', width: '0%', background: '#1da1f2',
+                transition: 'width 0.3s ease',
+              }} className="hdr-underline" />
+            </Link>
+          ))}
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className={`md:hidden p-2 rounded-lg transition-colors ${
-              darkMode ? 'hover:bg-gray-800' : 'hover:bg-gray-100'
-            }`}
+          {/* Contact CTA */}
+          <a
+            href="https://wa.me/919315264682"
+            target="_blank" rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: '8px',
+              padding: '8px 20px', borderRadius: '50px',
+              background: 'rgba(29,161,242,0.10)',
+              border: '1px solid rgba(29,161,242,0.35)',
+              color: '#1da1f2',
+              fontFamily: "'Montserrat', sans-serif",
+              fontSize: '12px', fontWeight: 700,
+              letterSpacing: '1px', textTransform: 'uppercase',
+              textDecoration: 'none',
+              transition: 'all 0.3s ease',
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.background = 'rgba(29,161,242,0.20)';
+              e.currentTarget.style.boxShadow = '0 0 18px rgba(29,161,242,0.35)';
+              e.currentTarget.style.transform = 'translateY(-1px)';
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.background = 'rgba(29,161,242,0.10)';
+              e.currentTarget.style.boxShadow = 'none';
+              e.currentTarget.style.transform = '';
+            }}
           >
-            <div className="w-6 h-5 relative flex flex-col justify-between">
-              <span className={`w-full h-0.5 ${darkMode ? 'bg-white' : 'bg-gray-900'} transform transition-all duration-300 ${
-                isMenuOpen ? 'rotate-45 translate-y-2' : ''
-              }`}></span>
-              <span className={`w-full h-0.5 ${darkMode ? 'bg-white' : 'bg-gray-900'} transition-all duration-300 ${
-                isMenuOpen ? 'opacity-0' : ''
-              }`}></span>
-              <span className={`w-full h-0.5 ${darkMode ? 'bg-white' : 'bg-gray-900'} transform transition-all duration-300 ${
-                isMenuOpen ? '-rotate-45 -translate-y-2' : ''
-              }`}></span>
-            </div>
-          </button>
-        </div>
+            Hire Me
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
+            </svg>
+          </a>
+        </nav>
 
-        {/* Mobile Menu */}
-        <div className={`md:hidden transition-all duration-300 overflow-hidden ${
-          isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'
-        }`}>
-          <nav className={`flex flex-col space-y-4 py-4 ${
-            darkMode ? 'text-gray-300' : 'text-gray-700'
-          }`}>
-            <Link
-              to="/"
-              className={`hover:${darkMode ? 'text-white' : 'text-gray-900'} hover:bg-${darkMode ? 'gray-800' : 'gray-100'} px-4 py-2 rounded-lg transition-colors`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Home
-            </Link>
-            <Link
-              to="/experience"
-              className={`hover:${darkMode ? 'text-white' : 'text-gray-900'} hover:bg-${darkMode ? 'gray-800' : 'gray-100'} px-4 py-2 rounded-lg transition-colors`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Experience
-            </Link>
-            <Link
-              to="/projects"
-              className={`hover:${darkMode ? 'text-white' : 'text-gray-900'} hover:bg-${darkMode ? 'gray-800' : 'gray-100'} px-4 py-2 rounded-lg transition-colors`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Projects
-            </Link>
-            
-            {/* Mobile Theme Toggle */}
-            <button
-              onClick={toggleTheme}
-              className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors ${
-                darkMode 
-                  ? 'text-yellow-400 hover:bg-gray-800' 
-                  : 'text-gray-600 hover:bg-gray-100'
-              }`}
-            >
-              {darkMode ? (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
-                    />
-                  </svg>
-                  <span>Light Mode</span>
-                </>
-              ) : (
-                <>
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" 
-                      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" 
-                    />
-                  </svg>
-                  <span>Dark Mode</span>
-                </>
-              )}
-            </button>
-          </nav>
-        </div>
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle menu"
+          style={{
+            display: 'none',
+            flexDirection: 'column', justifyContent: 'space-between',
+            width: '24px', height: '18px',
+            background: 'transparent', border: 'none', cursor: 'pointer',
+            padding: 0,
+          }}
+          className="hdr-hamburger"
+        >
+          {[0, 1, 2].map(i => (
+            <span key={i} style={{
+              display: 'block', width: '100%', height: '2px',
+              background: 'rgba(255,255,255,0.85)',
+              borderRadius: '2px',
+              transition: 'all 0.3s ease',
+              transform:
+                i === 0 && isMenuOpen ? 'rotate(45deg) translate(5px, 5px)' :
+                  i === 1 && isMenuOpen ? 'scaleX(0)' :
+                    i === 2 && isMenuOpen ? 'rotate(-45deg) translate(5px, -5px)' : 'none',
+              opacity: i === 1 && isMenuOpen ? 0 : 1,
+            }} />
+          ))}
+        </button>
       </div>
 
-      {/* Bottom Border */}
-      {/* <div className="absolute bottom-0 left-0 right-0 h-px bg-gray-200"></div> */}
-    </header>
-  )
-}
+      {/* Mobile dropdown */}
+      <div style={{
+        maxHeight: isMenuOpen ? '300px' : '0',
+        overflow: 'hidden',
+        transition: 'max-height 0.35s ease',
+        background: 'rgba(2,6,8,0.97)',
+        borderTop: isMenuOpen ? '1px solid rgba(255,255,255,0.07)' : 'none',
+      }}>
+        <nav style={{ display: 'flex', flexDirection: 'column', gap: '4px', padding: '16px 24px 20px' }}>
+          {[
+            { label: 'Home', to: '/' },
+            { label: 'Experience', to: '/experience' },
+            { label: 'Projects', to: '/projects' },
+          ].map(({ label, to }) => (
+            <Link
+              key={to} to={to}
+              onClick={() => setIsMenuOpen(false)}
+              style={{
+                ...navLinkStyle,
+                padding: '10px 0',
+                borderBottom: '1px solid rgba(255,255,255,0.05)',
+              }}
+            >
+              {label}
+            </Link>
+          ))}
+          <a
+            href="#contact"
+            onClick={() => setIsMenuOpen(false)}
+            style={{
+              ...navLinkStyle,
+              marginTop: '10px',
+              color: '#1da1f2',
+            }}
+          >
+            Hire Me ↗
+          </a>
+        </nav>
+      </div>
 
-export default Header 
+      {/* Inline responsive style to show/hide hamburger */}
+      <style>{`
+        @media (max-width: 768px) {
+          .hdr-desktop-nav { display: none !important; }
+          .hdr-hamburger   { display: flex !important; }
+        }
+      `}</style>
+    </header>
+  );
+};
+
+export default Header;
