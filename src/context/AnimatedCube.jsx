@@ -20,6 +20,7 @@ import '../styles/portfolio.css';
  */
 const AnimatedCube = ({
   style = {},
+  className = "",
   size = 240,
   cubeSize = 100,
   innerSize = 52,
@@ -45,7 +46,7 @@ const AnimatedCube = ({
 
   return (
     <div
-      className="ac-wrap"
+      className={`ac-wrap ${className}`}
       aria-hidden="true"
       style={{ width: size, height: size, zIndex, animation: floatAnim, ...cssVars, ...style }}
     >

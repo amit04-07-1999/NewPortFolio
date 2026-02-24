@@ -176,10 +176,10 @@ const ContactForm = () => {
 
         {/* Header */}
         <div className="ct-header">
-          <p className="ct-label">Get In Touch</p>
-          <h2 className="ct-title">CONTACT ME</h2>
+          <p className="ct-label cursor-target">Get In Touch</p>
+          <h2 className="ct-title cursor-target">CONTACT ME</h2>
           <div className="ct-title-line" />
-          <p className="ct-desc">
+          <p className="ct-desc cursor-target">
             Have a project in mind or want to collaborate? I'd love to hear from you.
             Drop a message and I'll get back to you as soon as possible.
           </p>
@@ -189,7 +189,7 @@ const ContactForm = () => {
         <div className="ct-body">
 
           {/* ── Left: Info card ── */}
-          <div className="ct-info-card" ref={infoRef}>
+          <div className="ct-info-card cursor-target" ref={infoRef}>
 
             {/* Services-style icon */}
             <div className="ct-contact-icon">
@@ -198,16 +198,16 @@ const ContactForm = () => {
               </svg>
             </div>
 
-            <h3 className="ct-info-heading">Let's Talk</h3>
+            <h3 className="ct-info-heading cursor-target">Let's Talk</h3>
             <div className="ct-info-divider" />
 
-            <p className="ct-info-text">
+            <p className="ct-info-text cursor-target">
               I'm currently available for freelance projects and full-time roles.
               Whether it's a quick question or a detailed proposal, feel free to reach out!
             </p>
 
             {/* Contact detail rows */}
-            <ul className="ct-details">
+            <ul className="ct-details cursor-target">
               {DETAILS.map((d, i) => (
                 <li key={i} className="ct-detail-item">
                   <div className="ct-detail-icon">{d.icon}</div>
@@ -226,7 +226,7 @@ const ContactForm = () => {
             </ul>
 
             {/* Social links */}
-            <div className="ct-socials">
+            <div className="ct-socials cursor-target">
               {SOCIALS.map((s, i) => (
                 <a key={i} href={s.href} target="_blank" rel="noopener noreferrer" className="ct-social-btn">
                   {s.icon}
@@ -236,22 +236,22 @@ const ContactForm = () => {
             </div>
 
             {/* Ghost number */}
-            <span className="ct-card-num" aria-hidden="true">01</span>
+            {/* <span className="ct-card-num" aria-hidden="true">01</span> */}
           </div>
 
           {/* ── Right: Form card ── */}
-          <div className="ct-form-card" ref={formRef}>
+          <div className="ct-form-card cursor-target" ref={formRef}>
             {/* Hatch stripe — top-right corner (matches sv-card-stripe) */}
             <div className="ct-form-stripe" aria-hidden="true" />
 
-            <h3 className="ct-form-title">Send a Message</h3>
+            <h3 className="ct-form-title cursor-target">Send a Message</h3>
             <div className="ct-form-divider" />
 
             <form onSubmit={handleSubmit} className="ct-form">
 
               {/* Name + Email */}
               <div className="ct-row">
-                <div className="ct-field">
+                <div className="ct-field cursor-target">
                   <label className="ct-field-label" htmlFor="ct-name">Your Name</label>
                   <input
                     id="ct-name"
@@ -264,7 +264,7 @@ const ContactForm = () => {
                     placeholder="Amit Kumar"
                   />
                 </div>
-                <div className="ct-field">
+                <div className="ct-field cursor-target">
                   <label className="ct-field-label" htmlFor="ct-email">Email Address</label>
                   <input
                     id="ct-email"
@@ -280,7 +280,7 @@ const ContactForm = () => {
               </div>
 
               {/* Subject */}
-              <div className="ct-field">
+              <div className="ct-field cursor-target">
                 <label className="ct-field-label" htmlFor="ct-subject">Subject</label>
                 <input
                   id="ct-subject"
@@ -295,7 +295,7 @@ const ContactForm = () => {
               </div>
 
               {/* Message */}
-              <div className="ct-field">
+              <div className="ct-field cursor-target">
                 <label className="ct-field-label" htmlFor="ct-message">Message</label>
                 <textarea
                   id="ct-message"
@@ -330,7 +330,7 @@ const ContactForm = () => {
             </form>
 
             {/* Ghost number */}
-            <span className="ct-card-num" aria-hidden="true">02</span>
+            {/* <span className="ct-card-num" aria-hidden="true">02</span> */}
           </div>
 
         </div>

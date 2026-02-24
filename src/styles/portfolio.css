@@ -318,7 +318,7 @@
   text-transform: uppercase;
   letter-spacing: 12px;
   color: transparent;
-  -webkit-text-stroke: 1.2px rgba(255, 255, 255, 0.34);
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.34);
   display: block;
 }
 
@@ -435,7 +435,6 @@
   letter-spacing: 14px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.34);
-  text-stroke: 1px rgba(255, 255, 255, 0.34);
   display: block;
 }
 
@@ -794,7 +793,6 @@
   letter-spacing: 14px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.34);
-  text-stroke: 1px rgba(255, 255, 255, 0.34);
   display: block;
 }
 
@@ -1129,7 +1127,6 @@
   letter-spacing: 14px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.34);
-  text-stroke: 1px rgba(255, 255, 255, 0.34);
   display: block;
 }
 
@@ -1488,7 +1485,6 @@
   letter-spacing: 14px;
   color: transparent;
   -webkit-text-stroke: 1px rgba(255, 255, 255, 0.34);
-  text-stroke: 1px rgba(255, 255, 255, 0.34);
   display: block;
 }
 
@@ -2006,7 +2002,23 @@
   color: #f87171;
 }
 
-/* Responsive */
+/* ════════════════════════════════════════════════════════════
+   RESPONSIVE DESIGN (GLOBAL MEDIA QUERIES)
+════════════════════════════════════════════════════════════ */
+
+/* Tablet & Smaller Desktop (1024px) */
+@media (max-width: 1024px) {
+  .sv-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .pr-card {
+    flex: 0 1 calc(50% - 20px);
+    min-width: 300px;
+  }
+}
+
+/* Tablets (900px) */
 @media (max-width: 900px) {
   .ct-body {
     grid-template-columns: 1fr;
@@ -2019,11 +2031,121 @@
   .ct-form-card {
     order: 1;
   }
+
+  .ex-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-@media (max-width: 560px) {
+/* Mobile Devices (768px) */
+@media (max-width: 768px) {
+  .hv-root {
+    height: auto;
+    padding: 120px 0 80px;
+    min-height: 100vh;
+  }
+
+  .hv-ghost-text {
+    font-size: clamp(60px, 15vw, 120px);
+    letter-spacing: 4px;
+    -webkit-text-stroke: 0.8px rgba(255, 255, 255, 0.2);
+  }
+
+  .hv-ghost-wrap {
+    top: 42% !important;
+    /* Thoda uper kar diya mobile me */
+  }
+
+  .hv-name {
+    font-size: clamp(40px, 10vw, 72px);
+  }
+
+  .hv-subtitle {
+    letter-spacing: 5px;
+    font-size: 11px;
+  }
+
+  .hv-scrambled-wrap {
+    position: static !important;
+    transform: none !important;
+    margin-top: 30px !important;
+    width: 90vw !important;
+  }
+
+  .hv-years-wrap {
+    position: static !important;
+    transform: none !important;
+    margin-top: 20px !important;
+    left: auto !important;
+  }
+
+  .hv-years {
+    width: 90vw !important;
+    margin-top: 0 !important;
+    gap: 10px !important;
+  }
+
+  .hv-lanyard-wrap {
+    display: none;
+    /* Hide complex 3D on small mobile to save space/perf */
+  }
+
+  .sv-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sv-root,
+  .ex-root,
+  .pr-root,
+  .ct-root {
+    padding: 80px 0 60px;
+  }
+
+  .sv-ghost-wrap,
+  .ct-ghost-wrap {
+    top: 100px !important;
+    /* Mobile me thoda niche kar diya */
+  }
+
+  .sv-ghost-text,
+  .ex-ghost-text,
+  .pr-ghost-text,
   .ct-ghost-text {
-    font-size: clamp(60px, 18vw, 100px);
+    font-size: clamp(50px, 12vw, 100px);
+    letter-spacing: 6px;
+    top: 40px;
+  }
+
+  /* Adjust Hatches for mobile */
+  .pt-hatch-tr,
+  .pt-hatch-bl,
+  .pt-hatch-lm {
+    width: 150px !important;
+    height: 80px !important;
+    opacity: 0.25 !important;
+  }
+
+  /* Adjust Hero Cubes for mobile */
+  .hv-cube-1 {
+    top: 10% !important;
+    left: 5% !important;
+    width: 120px !important;
+    height: 120px !important;
+  }
+
+  .hv-cube-2 {
+    bottom: 5% !important;
+    right: 5% !important;
+    width: 100px !important;
+    height: 100px !important;
+  }
+}
+
+/* Small Mobile (560px) */
+@media (max-width: 560px) {
+  .hv-year-num {
+    font-size: 13px;
+    letter-spacing: 1px;
   }
 
   .ct-row {
@@ -2033,5 +2155,33 @@
   .ct-submit-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .sv-card,
+  .ex-card,
+  .pr-card {
+    height: auto;
+    min-height: 350px;
+  }
+
+  .sv-tilted-overlay,
+  .ex-tilted-overlay,
+  .pr-tilted-overlay {
+    padding: 20px 18px;
+  }
+
+  .sv-tags,
+  .ex-tags,
+  .pr-tags {
+    margin-bottom: 2rem;
+    /* Reduce large spacing on mobile */
+  }
+
+  .sv-card-num,
+  .ex-card-num,
+  .pr-card-num {
+    font-size: 48px;
+    bottom: 5px;
+    right: 15px;
   }
 }

@@ -130,10 +130,10 @@ const Projects = () => {
 
       <div className="pr-inner">
         <div className="pr-header">
-          <p className="pr-label">My Works</p>
-          <h2 className="pr-title">SELECTED PROJECTS</h2>
+          <p className="pr-label cursor-target">My Works</p>
+          <h2 className="pr-title cursor-target">SELECTED PROJECTS</h2>
           <div className="pr-title-line" />
-          <p className="pr-desc">
+          <p className="pr-desc cursor-target">
             A showcase of my professional experience and independent
             creations in full-stack web development.
           </p>
@@ -142,14 +142,14 @@ const Projects = () => {
         {/* Professional Section */}
         {PROFESSIONAL_DATA.map((comp, cIdx) => (
           <div key={cIdx} className="pr-section">
-            <h3 className="pr-sub-grid-header">{comp.company} — {comp.location}</h3>
+            <h3 className="pr-sub-grid-header cursor-target">{comp.company} — {comp.location}</h3>
             <div className="pr-grid">
               {comp.projects.map((proj) => {
                 const currentIdx = projectIndex++;
                 return (
                   <div
                     key={proj.id}
-                    className="pr-card"
+                    className="pr-card cursor-target"
                     ref={(el) => (cardRefs.current[currentIdx] = el)}
                     style={{ animationDelay: `${currentIdx * 150}ms` }}
                   >
@@ -157,7 +157,7 @@ const Projects = () => {
                       variant="blue"
                       className="w-full h-full !rounded-[20px]"
                     >
-                      <div className="pr-tilted-overlay !static sm:!absolute">
+                      <div className="pr-tilted-overlay !absolute">
                         <div className="pr-icon-wrap">
                           <img src={proj.imageSrc} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                         </div>
@@ -180,14 +180,14 @@ const Projects = () => {
         ))}
 
         {/* Personal Projects Section */}
-        <h3 className="pr-sub-grid-header">Independent Creations</h3>
+        <h3 className="pr-sub-grid-header cursor-target">Independent Creations</h3>
         <div className="pr-grid">
           {PERSONAL_DATA.map((proj) => {
             const currentIdx = projectIndex++;
             return (
               <div
                 key={proj.id}
-                className="pr-card"
+                className="pr-card cursor-target"
                 ref={(el) => (cardRefs.current[currentIdx] = el)}
                 style={{ animationDelay: `${currentIdx * 150}ms` }}
               >
@@ -195,7 +195,7 @@ const Projects = () => {
                   variant="pink"
                   className="w-full h-full !rounded-[20px]"
                 >
-                  <div className="pr-tilted-overlay !static sm:!absolute">
+                  <div className="pr-tilted-overlay !absolute">
                     <div className="pr-icon-wrap">
                       <img src={proj.imageSrc} alt={proj.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
                     </div>

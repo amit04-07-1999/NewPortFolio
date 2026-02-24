@@ -100,10 +100,10 @@ const Services = () => {
 
         {/* Header */}
         <div className="sv-header">
-          <p className="sv-label">What I Do</p>
-          <h2 className="sv-title">MY EXPERTISE</h2>
+          <p className="sv-label cursor-target">What I Do</p>
+          <h2 className="sv-title cursor-target">MY EXPERTISE</h2>
           <div className="sv-title-line" />
-          <p className="sv-desc">
+          <p className="sv-desc cursor-target">
             Specialized in building modern full-stack web applications
             with cutting-edge technologies and clean architecture.
           </p>

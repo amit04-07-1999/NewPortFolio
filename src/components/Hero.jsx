@@ -18,6 +18,7 @@ const Hero = () => (
 
     {/* ── Top-left cube ── */}
     <AnimatedCube
+      className="hv-cube-1"
       style={{ top: '30px', left: '300px' }}
       floatDir="up"
       floatDuration="7s"
@@ -26,6 +27,7 @@ const Hero = () => (
 
     {/* ── Bottom-right cube ── */}
     <AnimatedCube
+      className="hv-cube-2"
       style={{ bottom: '20px', right: '200px' }}
       floatDir="up"
       floatDuration="8s"
@@ -33,33 +35,37 @@ const Hero = () => (
     />
 
     {/* ── Lanyard — left corner me absolutely positioned ── */}
-    <div style={{
-      position: 'absolute',
-      top: 0,
-      left: '-10%',
-      width: '45%',
-      height: '100%',
-      zIndex: 9,
-      pointerEvents: 'auto',
-    }}>
+    <div
+      className="hv-lanyard-wrap"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: '-10%',
+        width: '45%',
+        height: '100%',
+        zIndex: 9,
+        pointerEvents: 'auto',
+      }}>
       <Lanyard position={[0, 0, 20]} gravity={[0, -40, 0]} />
     </div>
 
-    {/* ── Main content — FIXED position so ScrambledText doesn't shift it ── */}
+    {/* ── Main content ── */}
     <div className="hv-content">
-      <h1 className="hv-name">AMIT KUMAR YADAV</h1>
-      <p className="hv-subtitle">MERN&nbsp;STACK&nbsp;DEVELOPER</p>
+      <h1 className="hv-name cursor-target">AMIT KUMAR YADAV</h1>
+      <p className="hv-subtitle cursor-target">MERN&nbsp;STACK&nbsp;DEVELOPER</p>
 
-      {/* ScrambledText — absolutely positioned so it doesn't affect flex layout */}
-      <div style={{
-        position: 'absolute',
-        top: 'calc(70% + 68px)',   /* subtitle ke theek neeche */
-        left: '50%',
-        transform: 'translateX(-50%)',
-        zIndex: 10,
-        width: 'min(600px, 80vw)',
-        textAlign: 'center',
-      }}>
+      {/* ScrambledText — absolutely positioned for desktop */}
+      <div
+        className="hv-scrambled-wrap cursor-target"
+        style={{
+          position: 'absolute',
+          top: 'calc(70% + 68px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+          width: 'min(600px, 80vw)',
+          textAlign: 'center',
+        }}>
         <ScrambledText
           radius={120}
           duration={1.2}
@@ -70,17 +76,21 @@ const Hero = () => (
         </ScrambledText>
       </div>
 
-      {/* hv-years — ScrambledText ke neeche, absolute position se */}
-      <div className="hv-years" style={{
-        position: 'absolute',
-        top: 'calc(50% + 200px)',  /* ScrambledText ke neeche */
-        left: '25%',
-        transform: 'translateX(-50%)',
-        zIndex: 10,
-      }}>
-        <span className="hv-year-num">2021</span>
-        <div className="hv-year-line" />
-        <span className="hv-year-num">2026</span>
+      {/* hv-years — absolutely positioned for desktop */}
+      <div
+        className="hv-years-wrap cursor-target"
+        style={{
+          position: 'absolute',
+          top: 'calc(50% + 200px)',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 10,
+        }}>
+        <div className="hv-years cursor-target">
+          <span className="hv-year-num cursor-target">2021</span>
+          <div className="hv-year-line" />
+          <span className="hv-year-num cursor-target">2026</span>
+        </div>
       </div>
     </div>
 
