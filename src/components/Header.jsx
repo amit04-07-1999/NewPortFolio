@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../styles/portfolio.css';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -22,6 +23,9 @@ const Header = () => {
     textDecoration: 'none',
     position: 'relative',
     transition: 'color 0.3s ease',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   };
 
   return (
@@ -56,20 +60,29 @@ const Header = () => {
             { label: 'Home', to: '/' },
             { label: 'Experience', to: '/experience' },
             { label: 'Projects', to: '/projects' },
-          ].map(({ label, to }) => (
-            <Link key={to} to={to} style={navLinkStyle}
-              onMouseEnter={e => { e.currentTarget.style.color = '#1da1f2'; }}
-              onMouseLeave={e => { e.currentTarget.style.color = 'rgba(255,255,255,0.75)'; }}
-            >
-              {label}
-              {/* Underline bar */}
-              <span style={{
-                position: 'absolute', bottom: '-4px', left: 0,
-                height: '1.5px', width: '0%', background: '#1da1f2',
-                transition: 'width 0.3s ease',
-              }} className="hdr-underline" />
-            </Link>
-          ))}
+          ].map(({ label, to }) => {
+            const isActive = location.pathname === to;
+            return (
+              <Link key={to} to={to} style={{
+                ...navLinkStyle,
+                color: isActive ? '#1da1f2' : 'rgba(255,255,255,0.75)'
+              }}
+                onMouseEnter={e => { e.currentTarget.style.color = '#1da1f2'; }}
+                onMouseLeave={e => { if (!isActive) e.currentTarget.style.color = 'rgba(255,255,255,0.75)'; }}
+              >
+                {label}
+                {isActive ? (
+                  <div className="sv-title-line" style={{ margin: '4px 0 0', width: '100%' }} />
+                ) : (
+                  <span style={{
+                    position: 'absolute', bottom: '-4px', left: 0,
+                    height: '1.5px', width: '0%', background: '#1da1f2',
+                    transition: 'width 0.3s ease',
+                  }} className="hdr-underline" />
+                )}
+              </Link>
+            );
+          })}
 
           {/* Contact CTA */}
           <a
@@ -147,19 +160,25 @@ const Header = () => {
             { label: 'Home', to: '/' },
             { label: 'Experience', to: '/experience' },
             { label: 'Projects', to: '/projects' },
-          ].map(({ label, to }) => (
-            <Link
-              key={to} to={to}
-              onClick={() => setIsMenuOpen(false)}
-              style={{
-                ...navLinkStyle,
-                padding: '10px 0',
-                borderBottom: '1px solid rgba(255,255,255,0.05)',
-              }}
-            >
-              {label}
-            </Link>
-          ))}
+          ].map(({ label, to }) => {
+            const isActive = location.pathname === to;
+            return (
+              <Link
+                key={to} to={to}
+                onClick={() => setIsMenuOpen(false)}
+                style={{
+                  ...navLinkStyle,
+                  padding: '10px 0',
+                  borderBottom: '1px solid rgba(255,255,255,0.05)',
+                  color: isActive ? '#1da1f2' : 'rgba(255,255,255,0.75)',
+                  alignItems: 'flex-start',
+                }}
+              >
+                {label}
+                {isActive && <div className="sv-title-line" style={{ margin: '2px 0 0', width: '40px' }} />}
+              </Link>
+            );
+          })}
           <a
             href="#contact"
             onClick={() => setIsMenuOpen(false)}

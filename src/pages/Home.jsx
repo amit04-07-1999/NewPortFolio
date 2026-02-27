@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import Services from '../components/Services';
+import TechStack from '../components/TechStack';
 import Projects from '../components/Project';
 import ContactForm from '../components/ContactForm';
 import Footer from '../components/Footer';
@@ -25,10 +26,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div style={{ background: '#020608' }}>
+    <div style={{ background: 'transparent' }}>
       <Header />
       <Hero />
       <Services />
+      <TechStack />
       <Projects />
       <ContactForm />
       <Footer />

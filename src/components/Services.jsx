@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/portfolio.css';
-import PageBackground from '../context/PageBackground';
 import TiltedCard from '../reactBitsComp/TiltedCard';
 import AnimatedCube from '../context/AnimatedCube';
 
@@ -36,7 +35,7 @@ const SERVICES = [
     id: 3, number: '03',
     title: 'Cloud & DevOps',
     description: 'Deploying and managing cloud infrastructure with AWS EC2, S3, and automated CI/CD pipelines.',
-    skills: ['AWS EC2', 'AWS S3', , 'GitHub Actions', 'CI/CD', 'Cloud Architecture', 'DevOps'],
+    skills: ['AWS EC2', 'AWS S3', 'GitHub Actions', 'CI/CD', 'Cloud Architecture', 'DevOps'],
     imageSrc: 'https://images.unsplash.com/photo-1544197150-b99a580bb7a8?w=300&h=300&fit=crop',
     icon: (
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -70,8 +69,7 @@ const Services = () => {
   return (
     <section className="sv-root" id="services">
 
-      {/* ── All shared background layers ── */}
-      <PageBackground hatchTR hatchBL />
+      {/* ── Background: Global (removed local) ── */}
 
       <AnimatedCube
         style={{ top: '60px', left: '4%' }}

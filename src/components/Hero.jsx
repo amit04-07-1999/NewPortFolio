@@ -1,15 +1,13 @@
 import React from 'react';
 import '../styles/portfolio.css';
 import AnimatedCube from '../context/AnimatedCube';
-import PageBackground from '../context/PageBackground';
 import ScrambledText from '../reactBitsComp/ScrambledText';
 import Lanyard from '../reactBitsComp/Lanyard';
 
 const Hero = () => (
   <section className="hv-root" id="hero">
 
-    {/* ── Shared bg layers: glows + vignette + hatch + particles ── */}
-    <PageBackground hatchTR hatchBL={false} hatchLM />
+    {/* ── Shared bg layers: removed (using global bg) ── */}
 
     {/* ── Ghost outline text ── */}
     <div className="hv-ghost-wrap" aria-hidden="true">

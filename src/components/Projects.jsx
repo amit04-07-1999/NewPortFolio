@@ -3,7 +3,6 @@ import Header from './Header';
 import Footer from './Footer';
 import ContactForm from './ContactForm';
 import '../styles/portfolio.css';
-import PageBackground from '../context/PageBackground';
 import AnimatedCube from '../context/AnimatedCube';
 
 const projects = [
@@ -87,12 +86,11 @@ const Projects = () => {
   }, []);
 
   return (
-    <div style={{ background: '#020608', minHeight: '100vh' }}>
+    <div style={{ background: 'transparent', minHeight: '100vh', position: 'relative' }}>
       <Header />
 
       <section className="pr-root">
-        {/* Background decorators — same as other sections */}
-        <PageBackground hatchTR hatchBL />
+        {/* Background decorators — using global bg */}
 
         {/* ── Floating Cubes ── */}
         <AnimatedCube
@@ -122,7 +120,7 @@ const Projects = () => {
               className="pr-pg-fade"
               style={{ textAlign: 'center', marginBottom: '64px' }}
             >
-              <p style={{
+              <p className='cursor-target' style={{
                 display: 'inline-block',
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 'clamp(10px, 1.2vw, 13px)',
@@ -135,7 +133,7 @@ const Projects = () => {
               }}>
                 My Work
               </p>
-              <h1 style={{
+              <h1 className='cursor-target' style={{
                 fontFamily: "'Bebas Neue', sans-serif",
                 fontSize: 'clamp(48px, 8vw, 100px)',
                 fontWeight: 900,
@@ -148,12 +146,12 @@ const Projects = () => {
               }}>
                 FEATURED PROJECTS
               </h1>
-              <div style={{
+              <div className='cursor-target' style={{
                 width: '60px', height: '2px',
                 background: 'linear-gradient(to right, transparent, #1da1f2, transparent)',
                 margin: '0 auto 18px',
               }} />
-              <p style={{
+              <p className='cursor-target' style={{
                 fontFamily: "'Montserrat', sans-serif",
                 fontSize: 'clamp(13px, 1.4vw, 16px)',
                 fontWeight: 400,
@@ -177,7 +175,7 @@ const Projects = () => {
                   style={{ animationDelay: `${index * 150}ms` }}
                 >
                   {/* Project card */}
-                  <div style={{
+                  <div className='cursor-target' style={{
                     borderRadius: '20px',
                     overflow: 'hidden',
                     background: 'rgba(255,255,255,0.03)',
@@ -198,7 +196,7 @@ const Projects = () => {
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }} className="pr-pg-grid">
 
                       {/* Image side */}
-                      <div style={{ position: 'relative', overflow: 'hidden', minHeight: '300px' }}>
+                      <div className='cursor-target' style={{ position: 'relative', overflow: 'hidden', minHeight: '300px' }}>
                         <img
                           src={project.image}
                           alt={project.title}
@@ -213,7 +211,7 @@ const Projects = () => {
                           onMouseLeave={e => { e.currentTarget.style.filter = 'brightness(0.65)'; e.currentTarget.style.transform = 'scale(1)'; }}
                         />
                         {/* Live Demo overlay */}
-                        <div style={{
+                        <div className='cursor-target' style={{
                           position: 'absolute', bottom: '20px', left: '20px',
                           display: 'flex', gap: '10px',
                         }}>
@@ -245,11 +243,11 @@ const Projects = () => {
                       </div>
 
                       {/* Details side */}
-                      <div style={{ padding: '36px 32px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+                      <div className='cursor-target' style={{ padding: '36px 32px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
 
                         {/* Title */}
                         <div>
-                          <h2 style={{
+                          <h2 className='cursor-target' style={{
                             fontFamily: "'Montserrat', sans-serif",
                             fontSize: 'clamp(18px, 2vw, 24px)',
                             fontWeight: 800,
@@ -261,18 +259,18 @@ const Projects = () => {
                           }}>
                             {project.title}
                           </h2>
-                          <div style={{ width: '36px', height: '2px', background: 'linear-gradient(to right, #1da1f2, rgba(29,161,242,0.2))', marginBottom: '14px' }} />
-                          <p style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
+                          <div className='cursor-target' style={{ width: '36px', height: '2px', background: 'linear-gradient(to right, #1da1f2, rgba(29,161,242,0.2))', marginBottom: '14px' }} />
+                          <p className='cursor-target' style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '13px', color: 'rgba(255,255,255,0.65)', lineHeight: 1.75, margin: 0 }}>
                             {project.longDescription}
                           </p>
                         </div>
 
                         {/* Key Features */}
                         <div>
-                          <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '12px' }}>
+                          <h3 className='cursor-target' style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '12px' }}>
                             Key Features
                           </h3>
-                          <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
+                          <ul className='cursor-target' style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '6px' }}>
                             {project.features.map((feature, i) => (
                               <li key={i} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px', fontFamily: "'Montserrat', sans-serif", fontSize: '12px', color: 'rgba(255,255,255,0.60)', lineHeight: 1.5 }}>
                                 <span style={{ color: '#1da1f2', flexShrink: 0, marginTop: '2px' }}>→</span>
@@ -284,12 +282,12 @@ const Projects = () => {
 
                         {/* Tech tags */}
                         <div>
-                          <h3 style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '10px' }}>
+                          <h3 className='cursor-target' style={{ fontFamily: "'Montserrat', sans-serif", fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '1.5px', color: 'rgba(29,161,242,0.8)', marginBottom: '10px' }}>
                             Technologies
                           </h3>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                          <div className='cursor-target' style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                             {[...project.technologies.frontend, ...project.technologies.backend, ...project.technologies.deployment].map((tech, i) => (
-                              <span key={i} style={{
+                              <span key={i} className='cursor-target' style={{
                                 fontFamily: "'Montserrat', sans-serif",
                                 fontSize: '10px', fontWeight: 700,
                                 letterSpacing: '0.7px', textTransform: 'uppercase',

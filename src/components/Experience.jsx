@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/portfolio.css';
-import PageBackground from '../context/PageBackground';
 import TiltedCard from '../reactBitsComp/TiltedCard';
 import AnimatedCube from '../context/AnimatedCube';
 import Header from './Header';
@@ -75,11 +74,10 @@ const Experience = () => {
   }, []);
 
   return (
-    <div className="experience-page">
+    <div className="experience-page" style={{ background: 'transparent' }}>
       <Header />
       <section className="ex-root" id="experience">
-        {/* ── All shared background layers ── */}
-        <PageBackground hatchTR hatchBL />
+        {/* ── Background: Global (removed local) ── */}
 
         {/* ── Floating Cubes ── */}
         <AnimatedCube
@@ -104,10 +102,10 @@ const Experience = () => {
         <div className="ex-inner">
           {/* Header */}
           <div className="ex-header">
-            <p className="ex-label">My Journey</p>
-            <h2 className="ex-title">WORK EXPERIENCE</h2>
+            <p className="ex-label cursor-target">My Journey</p>
+            <h2 className="ex-title cursor-target">WORK EXPERIENCE</h2>
             <div className="ex-title-line" />
-            <p className="ex-desc">
+            <p className="ex-desc cursor-target">
               Building innovative solutions and gaining expertise across various
               tech stacks and professional environments.
             </p>
@@ -118,7 +116,7 @@ const Experience = () => {
             {EXPERIENCES.map((exp, idx) => (
               <div
                 key={exp.id}
-                className="ex-card"
+                className="ex-card cursor-target"
                 ref={(el) => (cardRefs.current[idx] = el)}
                 style={{ animationDelay: `${idx * 180}ms` }}
               >
@@ -137,28 +135,28 @@ const Experience = () => {
                   overlayContent={
                     <div className="ex-tilted-overlay">
                       {/* Icon */}
-                      <div className="ex-icon-wrap">{exp.icon}</div>
+                      <div className="ex-icon-wrap cursor-target">{exp.icon}</div>
 
                       {/* Role & Company */}
-                      <h3 className="ex-card-title">{exp.role}</h3>
-                      <p className="ex-company">{exp.company}</p>
-                      <p className="ex-duration">{exp.duration}</p>
+                      <h3 className="ex-card-title cursor-target">{exp.role}</h3>
+                      <p className="ex-company cursor-target">{exp.company}</p>
+                      <p className="ex-duration cursor-target">{exp.duration}</p>
 
                       {/* Accent divider */}
                       <div className="ex-card-divider" />
 
                       {/* Brief description */}
-                      <p className="ex-card-desc">{exp.description}</p>
+                      <p className="ex-card-desc cursor-target">{exp.description}</p>
 
                       {/* Key Responsibilities */}
-                      <ul className="ex-responsibilities">
+                      <ul className="ex-responsibilities cursor-target">
                         {exp.responsibilities.slice(0, 3).map((res, i) => (
                           <li key={i}>{res}</li>
                         ))}
                       </ul>
 
                       {/* Tags */}
-                      <div className="ex-tags">
+                      <div className="ex-tags cursor-target">
                         {exp.skills.map((sk, i) => (
                           <span key={i} className="ex-tag">{sk}</span>
                         ))}

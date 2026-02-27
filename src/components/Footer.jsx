@@ -8,7 +8,7 @@ const Footer = () => {
     <footer
       style={{
         position: 'relative',
-        background: '#020608',
+        background: 'transparent',
         borderTop: '1px solid rgba(255,255,255,0.07)',
         padding: '40px 24px',
         textAlign: 'center',

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import '../styles/portfolio.css';
-import PageBackground from '../context/PageBackground';
 import PixelCard from '../reactBitsComp/PixelCard';
 import AnimatedCube from '../context/AnimatedCube';
 
@@ -56,13 +55,13 @@ const PROFESSIONAL_DATA = [
         id: 'p7', title: "EZI Mobile Travel App", number: '07',
         description: "Streamlined employee and admin management panels developed to optimize organizational operations.",
         tech: ["React.js", "Redux", "Material UI"],
-        imageSrc: '/Images/ezi.jpg',
+        imageSrc: '/Images/ezi.png',
       },
       {
         id: 'p8', title: "PostBox Mobile App", number: '08',
         description: "Streamlined employee and admin management panels developed to optimize organizational operations.",
         tech: ["React.js", "Redux", "Material UI"],
-        imageSrc: '/Images/postbox.jpg',
+        imageSrc: '/Images/postbox.png',
       },
     ]
   }
@@ -108,7 +107,7 @@ const Projects = () => {
 
   return (
     <section className="pr-root" id="projects">
-      <PageBackground hatchTR hatchBL />
+      {/* ── Background: Global (removed local) ── */}
 
       <AnimatedCube
         style={{ top: '35%', right: '4%' }}
