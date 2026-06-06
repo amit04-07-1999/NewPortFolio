@@ -1,16 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import emailjs from '@emailjs/browser';
 import '../styles/portfolio.css';
 import AnimatedCube from '../context/AnimatedCube';
+
+const CONTACT_API_URL = 'http://localhost:5000/api/contact';
 
 const ContactForm = () => {
   const infoRef = useRef(null);
   const formRef = useRef(null);
-
-  /* ── EmailJS init ── */
-  useEffect(() => {
-    emailjs.init('7jI6GN8xhgLVoZN4m');
-  }, []);
 
   /* ── Scroll-reveal (mirrors Services / Projects / Experience) ── */
   useEffect(() => {
@@ -42,25 +38,24 @@ const ContactForm = () => {
     e.preventDefault();
     setStatus({ submitting: true, submitted: false, error: null });
     try {
-      await emailjs.send(
-        'service_g5tkgvh',
-        'template_ui5fr9i',
-        {
-          from_name: formData.name,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_email: 'ameykumar76@gmail.com',
-          reply_to: formData.email,
-        },
-        '7jI6GN8xhgLVoZN4m'
-      );
+      const response = await fetch(CONTACT_API_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to send message. Please try again.');
+      }
+
       setStatus({ submitting: false, submitted: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus(prev => ({ ...prev, submitted: false })), 5000);
     } catch (err) {
       console.error('Email sending failed:', err);
-      setStatus({ submitting: false, submitted: false, error: 'Failed to send message. Please try again.' });
+      setStatus({ submitting: false, submitted: false, error: err.message || 'Failed to send message. Please try again.' });
     }
   };
 
