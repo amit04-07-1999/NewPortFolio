@@ -22,7 +22,8 @@ const techStack = [
   { name: "Responsive Design", img: "/Images/responsive.png" },
   { name: "TypeScript", img: "/Images/ts.png" },
   { name: "Docker", img: "/Images/docker.png" },
-  { name: "CI/CD", img: "/Images/cicd.png" }
+  { name: "CI/CD", img: "/Images/cicd.png" },
+  { name: "Hostinger", img: "/Images/host.png" }
 ];
 
 const TechStack = () => {

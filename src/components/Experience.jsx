@@ -11,10 +11,32 @@ const EXPERIENCES = [
   {
     id: 1,
     number: '01',
+    role: "Senior Web Developer",
+    company: "Seeds of Innocens",
+    location: "Malviya Nagar, New Delhi",
+    duration: "April 2025 - Present",
+    description: "Working on healthcare and education-focused web platforms with responsive interfaces, clean user flows, and full-stack feature development.",
+    responsibilities: [
+      "Building responsive web applications with modern React and Next.js",
+      "Developing APIs and backend features using Node.js and MongoDB",
+      "Improving user journeys for healthcare and inquiry-based websites",
+    ],
+    skills: ["React.js", "Next.js", "Node.js", "MongoDB", "API Integration"],
+    imageSrc: 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?w=500&h=500&fit=crop',
+    icon: (
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M12 2a7 7 0 017 7c0 5-7 13-7 13S5 14 5 9a7 7 0 017-7z" />
+        <circle cx="12" cy="9" r="2.5" />
+      </svg>
+    ),
+  },
+  {
+    id: 2,
+    number: '02',
     role: "Full Stack Developer",
     company: "Pizeonfly Pvt Ltd",
     location: "New Delhi, Sant Nagar",
-    duration: "March 2024 - Present",
+    duration: "March 2024 - March 2025",
     description: "Leading full-stack development projects and mentoring junior developers. Developed and maintained multiple CRM systems using MERN stack.",
     responsibilities: [
       "Developed and maintained multiple CRM systems using MERN stack",
@@ -30,8 +52,8 @@ const EXPERIENCES = [
     ),
   },
   {
-    id: 2,
-    number: '02',
+    id: 3,
+    number: '03',
     role: "Full Stack Developer",
     company: "TechNinza Pvt Ltd",
     location: "Haryana, Gurgaon",
@@ -140,6 +162,7 @@ const Experience = () => {
                       {/* Role & Company */}
                       <h3 className="ex-card-title cursor-target">{exp.role}</h3>
                       <p className="ex-company cursor-target">{exp.company}</p>
+                      <p className="ex-location cursor-target">{exp.location}</p>
                       <p className="ex-duration cursor-target">{exp.duration}</p>
 
                       {/* Accent divider */}

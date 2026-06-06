@@ -8,6 +8,239 @@ import AnimatedCube from '../context/AnimatedCube';
 const projects = [
   {
     id: 1,
+    number: '01',
+    title: "Seeds of Innocens IVF",
+    description: "An IVF and fertility care website focused on treatments, clinic information, and patient inquiries",
+    longDescription: "Built a modern healthcare website for Seeds of Innocens to present IVF treatments, fertility care services, doctor information, patient support, and appointment-focused journeys in a clear and trustworthy way.",
+    image: "Images/soi.jpg",
+    demoLink: "https://seedsofinnocens.com/",
+    githubLink: "",
+    features: [
+      "IVF treatment information pages",
+      "Doctor and clinic details",
+      "Appointment-focused user flow",
+      "Patient support content",
+      "Responsive healthcare layout",
+      "Trust-building service presentation"
+    ],
+    technologies: {
+      frontend: ["Next.js", "React.js", "CSS", "Responsive UI"],
+      backend: ["Node.js", "API Integration", "Form Handling", "MongoDB"],
+      deployment: ["Production Hosting", "Domain Setup"]
+    },
+    challenges: [
+      "Presenting healthcare information clearly",
+      "Creating a trustworthy patient experience",
+      "Optimizing wide website visuals for all screens",
+      "Keeping inquiry and appointment flows simple"
+    ]
+  },
+  {
+    id: 2,
+    number: '02',
+    title: "Home IVF",
+    description: "A modern IVF healthcare website for fertility treatment discovery and patient consultation inquiries",
+    longDescription: "Developed a responsive IVF website for Home IVF with treatment details, consultation-focused sections, clinic credibility content, and clear call-to-action flows for patients exploring fertility care.",
+    image: "Images/home.jpg",
+    demoLink: "https://homeivf.com/",
+    githubLink: "",
+    features: [
+      "Fertility treatment landing pages",
+      "Consultation inquiry sections",
+      "Doctor and service highlights",
+      "Mobile-friendly responsive design",
+      "Clear call-to-action placement",
+      "Healthcare-focused user experience"
+    ],
+    technologies: {
+      frontend: ["Next.js", "React.js", "CSS", "Responsive UI"],
+      backend: ["Node.js", "API Integration", "Form Handling", "MongoDB"],
+      deployment: ["Production Hosting", "Domain Setup"]
+    },
+    challenges: [
+      "Balancing medical content with clean design",
+      "Making consultation actions easy to find",
+      "Improving readability across devices",
+      "Displaying large hero visuals cleanly"
+    ]
+  },
+  {
+    id: 3,
+    number: '03',
+    title: "H & S Global Ventures",
+    description: "A corporate website for presenting business services, brand credibility, and contact-focused journeys",
+    longDescription: "Created a professional business website for H & S Global Ventures with service-focused content, responsive pages, brand presentation, and user-friendly contact flows for potential clients.",
+    image: "Images/hs.png",
+    demoLink: "https://www.hsglobalventure.com/",
+    githubLink: "",
+    features: [
+      "Corporate service presentation",
+      "Responsive business pages",
+      "Brand-focused visual layout",
+      "Contact and inquiry flow",
+      "Clean content structure",
+      "Fast user navigation"
+    ],
+    technologies: {
+      frontend: ["React.js", "CSS", "Responsive UI", "JavaScript"],
+      backend: ["Node.js", "Express.js", "MongoDB", "API Integration"],
+      deployment: ["Production Hosting", "Domain Setup"]
+    },
+    challenges: [
+      "Structuring services for quick scanning",
+      "Creating a professional brand experience",
+      "Keeping content readable on mobile",
+      "Building a simple inquiry path"
+    ]
+  },
+  {
+    id: 4,
+    number: '04',
+    title: "Caross Platform",
+    description: "A user-friendly web platform built for seamless interaction and high-performance data handling",
+    longDescription: "Developed a responsive web platform for Caross with clean user flows, modern interface sections, optimized content presentation, and smooth navigation for a polished client-facing experience.",
+    image: "Images/caross1.png",
+    demoLink: "https://caross.in/",
+    githubLink: "",
+    features: [
+      "Responsive platform layout",
+      "Clean user navigation",
+      "Service-focused content sections",
+      "Optimized visual presentation",
+      "Client-facing landing experience",
+      "Fast and accessible page structure"
+    ],
+    technologies: {
+      frontend: ["React.js", "CSS", "JavaScript", "Responsive UI"],
+      backend: ["Node.js", "Express.js", "MongoDB", "API Integration"],
+      deployment: ["Production Hosting", "Domain Setup"]
+    },
+    challenges: [
+      "Creating a clean platform experience",
+      "Maintaining consistent layout across screens",
+      "Optimizing image and content sections",
+      "Keeping navigation simple and polished"
+    ]
+  },
+  {
+    id: 5,
+    number: '05',
+    title: "India Educates",
+    description: "An education website helping Zambian students find scholarships and study opportunities in India",
+    longDescription: "Built an education-focused website for India Educates to help students from Zambia discover scholarship opportunities, understand study pathways in India, explore guidance content, and submit inquiries for academic support.",
+    image: "Images/ie.png",
+    demoLink: "https://indiaeducates.org/",
+    githubLink: "",
+    features: [
+      "Scholarship information sections",
+      "Study in India guidance",
+      "Student inquiry flow",
+      "Education-focused content layout",
+      "Responsive pages for students",
+      "Clear program and support details"
+    ],
+    technologies: {
+      frontend: ["Wordpress", "CSS", "JavaScript", "Responsive UI"],
+      backend: ["Node.js", "Express.js", "MongoDB", "API Integration"],
+      deployment: ["Production Hosting", "Domain Setup"]
+    },
+    challenges: [
+      "Making scholarship details easy to understand",
+      "Structuring education content for students",
+      "Building trust for international applicants",
+      "Keeping inquiry flow simple across devices"
+    ]
+  },
+  {
+    id: 6,
+    number: '06',
+    title: "Linknest",
+    description: "A link-in-bio platform for showcasing social profiles, websites, and important links in one place",
+    longDescription: "Built a Linktree-style platform where users can manage and share all social links, websites, portfolios, and important contact links through one clean public profile page.",
+    image: "Images/link1.png",
+    demoLink: "",
+    githubLink: "",
+    features: [
+      "Single shareable profile page",
+      "Social link management",
+      "Custom link sections",
+      "Responsive public profile",
+      "Clean dashboard experience",
+      "Fast link access for visitors"
+    ],
+    technologies: {
+      frontend: ["React.js", "CSS", "JavaScript", "Responsive UI"],
+      backend: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
+      deployment: ["AWS", "Production Hosting"]
+    },
+    challenges: [
+      "Creating a simple link management flow",
+      "Keeping public profiles clean and readable",
+      "Handling dynamic user link data",
+      "Optimizing profile pages for all devices"
+    ]
+  },
+  {
+    id: 7,
+    number: '07',
+    title: "All My Tab",
+    description: "A browser productivity website with curated bookmarks, tools, and quick-access resources",
+    longDescription: "Developed a browser upgrade platform that gives users ready-made bookmarks, useful tools, and organized quick links to make everyday browsing faster and more productive.",
+    image: "Images/amt1.png",
+    demoLink: "",
+    githubLink: "",
+    features: [
+      "Curated bookmark collections",
+      "Quick-access browser tools",
+      "Organized resource sections",
+      "Productivity-focused layout",
+      "Responsive browsing experience",
+      "Fast access to everyday links"
+    ],
+    technologies: {
+      frontend: ["React.js", "CSS", "JavaScript", "Responsive UI"],
+      backend: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
+      deployment: ["AWS", "Production Hosting"]
+    },
+    challenges: [
+      "Organizing many links without clutter",
+      "Making tools easy to scan and access",
+      "Building a fast and clean browsing dashboard",
+      "Keeping the interface useful on mobile"
+    ]
+  },
+  {
+    id: 8,
+    number: '08',
+    title: "Orange Lilies",
+    description: "A product-focused website for women's disposable panties with a clean shopping experience",
+    longDescription: "Created a responsive product website for Orange Lilies, a women's disposable panties brand, with polished product sections, clear brand messaging, and a smooth user journey for exploring products.",
+    image: "Images/orange1.png",
+    demoLink: "",
+    githubLink: "",
+    features: [
+      "Product-focused landing pages",
+      "Clean brand presentation",
+      "Responsive shopping layout",
+      "Clear product information",
+      "Inquiry and purchase-ready flow",
+      "Mobile-friendly product browsing"
+    ],
+    technologies: {
+      frontend: ["React.js", "CSS", "JavaScript", "Responsive UI"],
+      backend: ["Node.js", "Express.js", "MongoDB", "Socket.io"],
+      deployment: ["AWS", "Production Hosting"]
+    },
+    challenges: [
+      "Presenting product details clearly",
+      "Creating a polished brand experience",
+      "Making the layout comfortable on mobile",
+      "Keeping the shopping flow simple"
+    ]
+  },
+  {
+    id: 9,
+    number: '09',
     title: "Chat Application",
     description: "A real-time chat application with private messaging and group chat features",
     longDescription: "Built a comprehensive chat platform that enables users to communicate in real-time. The application supports both private messaging and group chats, with features like message status, typing indicators, and file sharing.",
@@ -35,7 +268,8 @@ const projects = [
     ]
   },
   {
-    id: 2,
+    id: 10,
+    number: '10',
     title: "E-Commerce Platform",
     description: "A full-featured e-commerce platform with product management and secure payments",
     longDescription: "Developed a comprehensive e-commerce solution that provides a seamless shopping experience. The platform includes features like product categorization, cart management, secure payments, and order tracking.",
@@ -176,6 +410,7 @@ const Projects = () => {
                 >
                   {/* Project card */}
                   <div className='cursor-target' style={{
+                    position: 'relative',
                     borderRadius: '20px',
                     overflow: 'hidden',
                     background: 'rgba(255,255,255,0.03)',
@@ -194,6 +429,24 @@ const Projects = () => {
                     }}
                   >
                     <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 0 }} className="pr-pg-grid">
+                      <span
+                        aria-hidden="true"
+                        style={{
+                          position: 'absolute',
+                          top: '18px',
+                          right: '24px',
+                          zIndex: 2,
+                          fontFamily: "'Bebas Neue', sans-serif",
+                          fontSize: 'clamp(58px, 8vw, 92px)',
+                          fontWeight: 900,
+                          lineHeight: 1,
+                          color: 'rgba(255,255,255,0.16)',
+                          textShadow: '0 0 22px rgba(29,161,242,0.16)',
+                          pointerEvents: 'none',
+                        }}
+                      >
+                        {project.number || String(index + 1).padStart(2, '0')}
+                      </span>
 
                       {/* Image side */}
                       <div className='cursor-target' style={{ position: 'relative', overflow: 'hidden', minHeight: '300px' }}>
@@ -211,35 +464,37 @@ const Projects = () => {
                           onMouseLeave={e => { e.currentTarget.style.filter = 'brightness(0.65)'; e.currentTarget.style.transform = 'scale(1)'; }}
                         />
                         {/* Live Demo overlay */}
-                        <div className='cursor-target' style={{
-                          position: 'absolute', bottom: '20px', left: '20px',
-                          display: 'flex', gap: '10px',
-                        }}>
-                          <a
-                            href={project.demoLink}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            style={{
-                              display: 'inline-flex', alignItems: 'center', gap: '6px',
-                              padding: '8px 18px', borderRadius: '50px',
-                              background: 'linear-gradient(135deg, #1da1f2 0%, #0d8fd8 100%)',
-                              color: '#fff',
-                              fontFamily: "'Montserrat', sans-serif",
-                              fontSize: '11px', fontWeight: 700,
-                              textDecoration: 'none', letterSpacing: '0.8px',
-                              textTransform: 'uppercase',
-                              boxShadow: '0 4px 16px rgba(29,161,242,0.40)',
-                              transition: 'all 0.3s ease',
-                            }}
-                            onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(29,161,242,0.52)'; }}
-                            onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 16px rgba(29,161,242,0.40)'; }}
-                          >
-                            Live Demo
-                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                              <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
-                            </svg>
-                          </a>
-                        </div>
+                        {project.demoLink && (
+                          <div className='cursor-target' style={{
+                            position: 'absolute', bottom: '20px', left: '20px',
+                            display: 'flex', gap: '10px',
+                          }}>
+                            <a
+                              href={project.demoLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              style={{
+                                display: 'inline-flex', alignItems: 'center', gap: '6px',
+                                padding: '8px 18px', borderRadius: '50px',
+                                background: 'linear-gradient(135deg, #1da1f2 0%, #0d8fd8 100%)',
+                                color: '#fff',
+                                fontFamily: "'Montserrat', sans-serif",
+                                fontSize: '11px', fontWeight: 700,
+                                textDecoration: 'none', letterSpacing: '0.8px',
+                                textTransform: 'uppercase',
+                                boxShadow: '0 4px 16px rgba(29,161,242,0.40)',
+                                transition: 'all 0.3s ease',
+                              }}
+                              onMouseEnter={e => { e.currentTarget.style.transform = 'translateY(-2px)'; e.currentTarget.style.boxShadow = '0 8px 24px rgba(29,161,242,0.52)'; }}
+                              onMouseLeave={e => { e.currentTarget.style.transform = ''; e.currentTarget.style.boxShadow = '0 4px 16px rgba(29,161,242,0.40)'; }}
+                            >
+                              Live Demo
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" />
+                              </svg>
+                            </a>
+                          </div>
+                        )}
                       </div>
 
                       {/* Details side */}
