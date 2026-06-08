@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../styles/portfolio.css';
 import AnimatedCube from '../context/AnimatedCube';
 
-const CONTACT_API_URL = 'http://localhost:5000/api/contact';
+const CONTACT_API_URL = 'https://new-port-folio-backend.vercel.app/api/contact';
 
 const ContactForm = () => {
   const infoRef = useRef(null);
